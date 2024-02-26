@@ -16,6 +16,7 @@
 		F03247322B8D005800B1C6B3 /* BrowserDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03247312B8D005800B1C6B3 /* BrowserDemoTests.swift */; };
 		F032473C2B8D005800B1C6B3 /* BrowserDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032473B2B8D005800B1C6B3 /* BrowserDemoUITests.swift */; };
 		F032473E2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032473D2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift */; };
+		F032474B2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		F03247372B8D005800B1C6B3 /* BrowserDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrowserDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F032473B2B8D005800B1C6B3 /* BrowserDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDemoUITests.swift; sourceTree = "<group>"; };
 		F032473D2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserToolbarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				F03247232B8D005800B1C6B3 /* Assets.xcassets */,
 				F03247252B8D005800B1C6B3 /* LaunchScreen.storyboard */,
 				F03247282B8D005800B1C6B3 /* Info.plist */,
+				F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */,
 			);
 			path = BrowserDemo;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			files = (
 				F032471F2B8D005600B1C6B3 /* ViewController.swift in Sources */,
 				F032471B2B8D005600B1C6B3 /* AppDelegate.swift in Sources */,
+				F032474B2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift in Sources */,
 				F032471D2B8D005600B1C6B3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
