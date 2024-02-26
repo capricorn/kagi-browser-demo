@@ -18,7 +18,6 @@ class WebViewController: UIViewController, WKUIDelegate {
         view = webView
     }
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         

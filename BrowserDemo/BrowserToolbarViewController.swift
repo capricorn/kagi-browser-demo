@@ -10,6 +10,13 @@ import UIKit
 class BrowserToolbarViewController: UIViewController {
     private var backButton: UIButton!
     private var searchTextField: UITextField!
+    private let searchDelegate = SearchDelegate()
+    
+    private class SearchDelegate: NSObject, UITextFieldDelegate {
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            return true
+        }
+    }
     
     @objc
     private func handleBackButton() {
@@ -27,6 +34,7 @@ class BrowserToolbarViewController: UIViewController {
         searchTextField = UITextField()
         searchTextField.borderStyle = .line
         searchTextField.placeholder = "Search"
+        searchTextField.delegate = self.searchDelegate
         
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         backButton.translatesAutoresizingMaskIntoConstraints = false
