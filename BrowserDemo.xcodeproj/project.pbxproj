@@ -17,6 +17,7 @@
 		F032473C2B8D005800B1C6B3 /* BrowserDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032473B2B8D005800B1C6B3 /* BrowserDemoUITests.swift */; };
 		F032473E2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032473D2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift */; };
 		F032474B2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */; };
+		F032474D2B8D50E600B1C6B3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032474C2B8D50E600B1C6B3 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		F032473B2B8D005800B1C6B3 /* BrowserDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDemoUITests.swift; sourceTree = "<group>"; };
 		F032473D2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserToolbarViewController.swift; sourceTree = "<group>"; };
+		F032474C2B8D50E600B1C6B3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				F03247252B8D005800B1C6B3 /* LaunchScreen.storyboard */,
 				F03247282B8D005800B1C6B3 /* Info.plist */,
 				F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */,
+				F032474C2B8D50E600B1C6B3 /* WebViewController.swift */,
 			);
 			path = BrowserDemo;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				F032471F2B8D005600B1C6B3 /* ViewController.swift in Sources */,
 				F032471B2B8D005600B1C6B3 /* AppDelegate.swift in Sources */,
 				F032474B2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift in Sources */,
+				F032474D2B8D50E600B1C6B3 /* WebViewController.swift in Sources */,
 				F032471D2B8D005600B1C6B3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

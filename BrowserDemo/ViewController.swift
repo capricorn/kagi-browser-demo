@@ -12,30 +12,27 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let safeArea = view.safeAreaLayoutGuide
         
-        // TODO: Programmatically add view controller..?
         let toolbar = BrowserToolbarViewController()
         self.addChild(toolbar)
         self.view.addSubview(toolbar.view)
         
-        let safeArea = view.safeAreaLayoutGuide
         toolbar.view.translatesAutoresizingMaskIntoConstraints = false
         toolbar.view.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
         toolbar.view.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
         toolbar.view.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
         toolbar.view.heightAnchor.constraint(equalToConstant: 32).isActive = true
         
-        label = UITextView()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "testing label"
-        label.font = .systemFont(ofSize: 16)
+        let webViewController = WebViewController()
+        let webView = webViewController.view!
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        self.addChild(webViewController)
+        self.view.addSubview(webView)
         
-        self.view.addSubview(label)
-        
-        label.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
-        // TODO: Dynamic sizing according to text requirements..?
-        label.heightAnchor.constraint(greaterThanOrEqualToConstant: 32).isActive = true
+        webView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor).isActive = true
+        webView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
+        webView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: toolbar.view.topAnchor).isActive = true
     }
 }
