@@ -68,6 +68,15 @@ class BrowserToolbarViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    var extensionButtons: [UIButton] {
+        self.extensionIcons.map {
+            let button = UIButton()
+            button.setImage($0, for: .normal)
+            // TODO: Set callback
+            return button
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,7 +105,7 @@ class BrowserToolbarViewController: UIViewController {
         backButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         // TODO: Build UIButton
-        let extensionStack = UIStackView(arrangedSubviews: self.extensionIcons.map({ UIImageView(image: $0) }))
+        let extensionStack = UIStackView(arrangedSubviews: self.extensionButtons)
         if self.extensionIcons.count > 0 {
             self.view.addSubview(extensionStack)
             extensionStack.translatesAutoresizingMaskIntoConstraints = false
