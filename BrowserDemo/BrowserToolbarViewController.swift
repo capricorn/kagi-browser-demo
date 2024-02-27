@@ -7,24 +7,61 @@
 
 import UIKit
 
+protocol BrowserToolbarDelegate {
+    func search(_ input: String?)
+    func back()
+}
+
+extension BrowserToolbarDelegate {
+    func search(_ input: String?) {}
+    func back() {}
+}
+
 class BrowserToolbarViewController: UIViewController {
     private var backButton: UIButton!
     private var searchTextField: UITextField!
     private let searchDelegate = SearchDelegate()
+    var delegate: BrowserToolbarDelegate?
     
-    private class SearchDelegate: NSObject, UITextFieldDelegate {
+    class SearchDelegate: NSObject, UITextFieldDelegate {
+        var toolbarDelegate: BrowserToolbarDelegate?
+        
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             return true
+        }
+        
+        func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+            return true
+        }
+        
+        func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+            switch reason {
+            case .committed:
+                toolbarDelegate?.search(textField.text)
+            default:
+                break
+            }
         }
     }
     
     @objc
     private func handleBackButton() {
-        print("back button")
+        delegate?.back()
+    }
+    
+    init(delegate: BrowserToolbarDelegate?=nil) {
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.searchDelegate.toolbarDelegate = self.delegate
         
         backButton = UIButton()
         // TODO: Respect aspect ratio (wrt height)

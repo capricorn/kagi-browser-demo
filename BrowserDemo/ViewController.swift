@@ -6,15 +6,45 @@
 //
 
 import UIKit
+import WebKit
 
 class ViewController: UIViewController {
     private var label: UITextView!
+    private var toolbarDelegate: ToolbarDelegate!
+    
+    private class ToolbarDelegate: BrowserToolbarDelegate {
+        let webViewController: WebViewController
+        
+        private var webView: WKWebView {
+            webViewController.webView
+        }
+        
+        init(webViewController: WebViewController) {
+            self.webViewController = webViewController
+        }
+        
+        func search(_ input: String?) {
+            // TODO: Handle malformed urls -- prefix url with https:// if missing
+            if let input, let url = URL(string: input) {
+                webView.load(URLRequest(url: url))
+            }
+        }
+        
+        func back() {
+            print("Delegate back")
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let safeArea = view.safeAreaLayoutGuide
         
-        let toolbar = BrowserToolbarViewController()
+        let webViewController = WebViewController()
+        let webView = webViewController.view!
+        
+        toolbarDelegate = ToolbarDelegate(webViewController: webViewController)
+        
+        let toolbar = BrowserToolbarViewController(delegate: toolbarDelegate)
         self.addChild(toolbar)
         self.view.addSubview(toolbar.view)
         
@@ -24,8 +54,6 @@ class ViewController: UIViewController {
         toolbar.view.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor).isActive = true
         toolbar.view.heightAnchor.constraint(equalToConstant: 32).isActive = true
         
-        let webViewController = WebViewController()
-        let webView = webViewController.view!
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.addChild(webViewController)
         self.view.addSubview(webView)
