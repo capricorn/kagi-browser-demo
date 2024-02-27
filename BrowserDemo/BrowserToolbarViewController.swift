@@ -23,6 +23,8 @@ class BrowserToolbarViewController: UIViewController {
     private var searchTextField: UITextField!
     private let searchDelegate = SearchDelegate()
     private var extensionInstallSubscriber: AnyCancellable? = nil
+    
+    private var extensionIcons: [UIImage] = []
     var delegate: BrowserToolbarDelegate?
     
     class SearchDelegate: NSObject, UITextFieldDelegate {
@@ -53,11 +55,13 @@ class BrowserToolbarViewController: UIViewController {
     
     init(delegate: BrowserToolbarDelegate?=nil) {
         self.delegate = delegate
-        self.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { _ in
-            print("Received installation update")
-        }
-        
         super.init(nibName: nil, bundle: nil)
+        
+        self.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { [weak self] _ in
+            print("Received installation update")
+            self?.extensionIcons.append(UIImage(systemName: "puzzlepiece.extension")!)
+            self?.viewDidLoad()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -91,8 +95,26 @@ class BrowserToolbarViewController: UIViewController {
         backButton.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         backButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
+        // TODO: Build UIButton
+        let extensionStack = UIStackView(arrangedSubviews: self.extensionIcons.map({ UIImageView(image: $0) }))
+        if self.extensionIcons.count > 0 {
+            self.view.addSubview(extensionStack)
+            extensionStack.translatesAutoresizingMaskIntoConstraints = false
+            extensionStack.axis = .horizontal
+            //extensionStack.leadingAnchor.constraint(equalTo: searchTextField.leadingAnchor).isActive = true
+            extensionStack.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            extensionStack.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            extensionStack.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            // TODO: Scrollview?
+            extensionStack.widthAnchor.constraint(greaterThanOrEqualToConstant: 32).isActive = true
+            extensionStack.clipsToBounds = true
+            extensionStack.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        }
+        
+        let searchTrailingAnchor = (self.extensionIcons.count > 0) ? extensionStack.leadingAnchor : view.trailingAnchor
+        
         searchTextField.leadingAnchor.constraint(equalTo: backButton.trailingAnchor).isActive = true
-        searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        searchTextField.trailingAnchor.constraint(equalTo: searchTrailingAnchor).isActive = true
         searchTextField.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         searchTextField.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         
