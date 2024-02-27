@@ -8,14 +8,48 @@
 import UIKit
 import WebKit
 
-class WebViewController: UIViewController, WKUIDelegate {
+private enum ScriptMessageType: String {
+    case installExtension
+}
+
+private extension WKUserContentController {
+    func add(
+        _ scriptMessageHandler: WKScriptMessageHandler,
+        name: ScriptMessageType
+    ) {
+        self.add(scriptMessageHandler, name: name.rawValue)
+    }
+}
+
+class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
     var webView: WKWebView!
+    
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        switch ScriptMessageType(rawValue: message.name) {
+        case .installExtension:
+            let extensionURL = message.body as! String
+            print("Extension url: \(extensionURL)")
+        default:
+            break
+        }
+    }
     
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         let contentController = WKUserContentController()
         
-        let browserNameUserScript = "if (document.domain == 'addons.mozilla.org') { setInterval(() => { document.querySelector('a.AMInstallButton-button').textContent = 'Add to Orion'}, 100) }"
+        let browserNameUserScript = """
+        if (document.domain == 'addons.mozilla.org') { \
+            window.webkit.messageHandlers.installExtension.postMessage();
+            setInterval(() => { \
+                let button = document.querySelector('a.AMInstallButton-button'); \
+                button.textContent = 'Add to Orion'; \
+                button.onclick = (e) => { window.webkit.messageHandlers.installExtension.postMessage(button.href) };
+            }, 100); \
+        }
+        """
+        contentController.add(self, name: .installExtension)
         contentController.addUserScript(WKUserScript(source: browserNameUserScript, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
         webConfiguration.userContentController = contentController
         
