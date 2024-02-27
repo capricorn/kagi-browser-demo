@@ -18,6 +18,10 @@
 		F032473E2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032473D2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift */; };
 		F032474B2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */; };
 		F032474D2B8D50E600B1C6B3 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032474C2B8D50E600B1C6B3 /* WebViewController.swift */; };
+		F03247542B8E89DB00B1C6B3 /* top_sites_button-1.5.xpi in Resources */ = {isa = PBXBuildFile; fileRef = F03247532B8E89B400B1C6B3 /* top_sites_button-1.5.xpi */; };
+		F03247572B8E8A7900B1C6B3 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = F03247562B8E8A7900B1C6B3 /* ZIPFoundation */; };
+		F03247592B8E8ADE00B1C6B3 /* BrowserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03247582B8E8ADE00B1C6B3 /* BrowserExtension.swift */; };
+		F032475B2B8E902500B1C6B3 /* ExtensionManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032475A2B8E902500B1C6B3 /* ExtensionManifest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,9 @@
 		F032473D2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserToolbarViewController.swift; sourceTree = "<group>"; };
 		F032474C2B8D50E600B1C6B3 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		F03247532B8E89B400B1C6B3 /* top_sites_button-1.5.xpi */ = {isa = PBXFileReference; lastKnownFileType = file; path = "top_sites_button-1.5.xpi"; sourceTree = "<group>"; };
+		F03247582B8E8ADE00B1C6B3 /* BrowserExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserExtension.swift; sourceTree = "<group>"; };
+		F032475A2B8E902500B1C6B3 /* ExtensionManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionManifest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F03247572B8E8A7900B1C6B3 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +120,8 @@
 				F03247282B8D005800B1C6B3 /* Info.plist */,
 				F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */,
 				F032474C2B8D50E600B1C6B3 /* WebViewController.swift */,
+				F03247582B8E8ADE00B1C6B3 /* BrowserExtension.swift */,
+				F032475A2B8E902500B1C6B3 /* ExtensionManifest.swift */,
 			);
 			path = BrowserDemo;
 			sourceTree = "<group>";
@@ -119,6 +129,7 @@
 		F03247302B8D005800B1C6B3 /* BrowserDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				F032474E2B8E877400B1C6B3 /* TestData */,
 				F03247312B8D005800B1C6B3 /* BrowserDemoTests.swift */,
 			);
 			path = BrowserDemoTests;
@@ -131,6 +142,14 @@
 				F032473D2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift */,
 			);
 			path = BrowserDemoUITests;
+			sourceTree = "<group>";
+		};
+		F032474E2B8E877400B1C6B3 /* TestData */ = {
+			isa = PBXGroup;
+			children = (
+				F03247532B8E89B400B1C6B3 /* top_sites_button-1.5.xpi */,
+			);
+			path = TestData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +168,9 @@
 			dependencies = (
 			);
 			name = BrowserDemo;
+			packageProductDependencies = (
+				F03247562B8E8A7900B1C6B3 /* ZIPFoundation */,
+			);
 			productName = BrowserDemo;
 			productReference = F03247172B8D005600B1C6B3 /* BrowserDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -221,6 +243,9 @@
 				Base,
 			);
 			mainGroup = F032470E2B8D005600B1C6B3;
+			packageReferences = (
+				F03247552B8E8A7900B1C6B3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+			);
 			productRefGroup = F03247182B8D005600B1C6B3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -247,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F03247542B8E89DB00B1C6B3 /* top_sites_button-1.5.xpi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +293,9 @@
 				F032471F2B8D005600B1C6B3 /* ViewController.swift in Sources */,
 				F032471B2B8D005600B1C6B3 /* AppDelegate.swift in Sources */,
 				F032474B2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift in Sources */,
+				F032475B2B8E902500B1C6B3 /* ExtensionManifest.swift in Sources */,
 				F032474D2B8D50E600B1C6B3 /* WebViewController.swift in Sources */,
+				F03247592B8E8ADE00B1C6B3 /* BrowserExtension.swift in Sources */,
 				F032471D2B8D005600B1C6B3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -615,6 +643,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F03247552B8E8A7900B1C6B3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.18;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F03247562B8E8A7900B1C6B3 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F03247552B8E8A7900B1C6B3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F032470F2B8D005600B1C6B3 /* Project object */;
 }
