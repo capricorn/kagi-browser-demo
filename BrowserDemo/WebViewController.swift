@@ -30,6 +30,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler 
         case .installExtension:
             let extensionURL = message.body as! String
             print("Extension url: \(extensionURL)")
+            // TODO: Info on installed extension?
+            NotificationCenter.default.post(name: .installedBrowserExtension, object: nil)
         default:
             break
         }

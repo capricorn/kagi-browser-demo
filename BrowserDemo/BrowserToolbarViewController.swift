@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol BrowserToolbarDelegate {
     func search(_ input: String?)
@@ -21,6 +22,7 @@ class BrowserToolbarViewController: UIViewController {
     private var backButton: UIButton!
     private var searchTextField: UITextField!
     private let searchDelegate = SearchDelegate()
+    private var extensionInstallSubscriber: AnyCancellable? = nil
     var delegate: BrowserToolbarDelegate?
     
     class SearchDelegate: NSObject, UITextFieldDelegate {
@@ -51,6 +53,10 @@ class BrowserToolbarViewController: UIViewController {
     
     init(delegate: BrowserToolbarDelegate?=nil) {
         self.delegate = delegate
+        self.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { _ in
+            print("Received installation update")
+        }
+        
         super.init(nibName: nil, bundle: nil)
     }
     
