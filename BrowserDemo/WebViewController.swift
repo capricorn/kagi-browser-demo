@@ -13,9 +13,16 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
+        let contentController = WKUserContentController()
+        
+        let browserNameUserScript = "if (document.domain == 'addons.mozilla.org') { setInterval(() => { document.querySelector('a.AMInstallButton-button').textContent = 'Add to Orion'}, 100) }"
+        contentController.addUserScript(WKUserScript(source: browserNameUserScript, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
+        webConfiguration.userContentController = contentController
+        
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:70.0) Gecko/20100101 Firefox/70.0"
+        
         view = webView
     }
 
