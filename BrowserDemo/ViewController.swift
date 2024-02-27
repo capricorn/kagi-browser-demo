@@ -31,7 +31,9 @@ class ViewController: UIViewController {
         }
         
         func back() {
-            print("Delegate back")
+            if webView.canGoBack {
+                webView.goBack()
+            }
         }
     }
 
