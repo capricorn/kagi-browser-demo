@@ -30,7 +30,7 @@ final class BrowserDemoTests: XCTestCase {
     }
     
     func testSaveUnpacked() throws {
-        let tmpExtensionsDir = FileManager.default.temporaryDirectory.appendingPathComponent(self.name)
+        let tmpExtensionsDir = FileManager.default.temporaryDirectory / self.name
         try FileManager.default.createDirectory(at: tmpExtensionsDir, withIntermediateDirectories: true)
         
         let extractDirName = UUID().uuidString
@@ -38,6 +38,6 @@ final class BrowserDemoTests: XCTestCase {
         
         XCTAssert(resultURL.lastPathComponent == "\(extractDirName)_extracted")
         XCTAssert(FileManager.default.fileExists(atPath: resultURL.path))
-        XCTAssert(FileManager.default.fileExists(atPath: resultURL.appendingPathComponent("manifest.json").path))
+        XCTAssert(FileManager.default.fileExists(atPath: (resultURL / "manifest.json").path))
     }
 }

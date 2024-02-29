@@ -69,10 +69,10 @@ class BrowserExtension {
     
     @discardableResult
     static func saveUnpacked(_ xpi: Data, filename: String, extensionInstallDir: URL=FileManager.default.orionExtensionInstallDir) throws -> URL {
-        let xpiURL = FileManager.default.temporaryDirectory.appendingPathComponent(filename)
+        let xpiURL = FileManager.default.temporaryDirectory / filename
         try xpi.write(to: xpiURL)
         
-        let extractionURL = extensionInstallDir.appendingPathComponent("\(filename)_extracted")
+        let extractionURL = extensionInstallDir / "\(filename)_extracted"
         
         if FileManager.default.fileExists(atPath: extractionURL.path) {
             try FileManager.default.removeItem(at: extractionURL)
