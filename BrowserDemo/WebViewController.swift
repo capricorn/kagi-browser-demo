@@ -32,11 +32,11 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler 
                 let xpiDownloadURL = URL(string: url)!
                 let (data, resp) = try await URLSession.shared.data(from: xpiDownloadURL)
                 
-                try BrowserExtension.saveUnpacked(data, filename: xpiDownloadURL.lastPathComponent)
+                let extensionURL = try BrowserExtension.saveUnpacked(data, filename: xpiDownloadURL.lastPathComponent)
                 
                 DispatchQueue.main.async {
                     // TODO: Send unzip file url in this message
-                    NotificationCenter.default.post(name: .installedBrowserExtension, object: nil)
+                    NotificationCenter.default.post(name: .installedBrowserExtension, object: extensionURL)
                 }
             } catch {
                 print("Extension install failed: \(error)")

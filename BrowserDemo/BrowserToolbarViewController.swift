@@ -57,8 +57,10 @@ class BrowserToolbarViewController: UIViewController {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
         
-        self.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { [weak self] _ in
-            print("Received installation update")
+        self.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { [weak self] message in
+            print("Received installation update: \((message.object as? URL)?.path)")
+            let extensionURL = URL(string: "file://" + (message.object as! URL).path)!
+            self?.delegate?.search(extensionURL.absoluteString)
             self?.extensionIcons.append(UIImage(systemName: "puzzlepiece.extension")!)
             self?.viewDidLoad()
         }

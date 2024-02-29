@@ -26,7 +26,11 @@ class ViewController: UIViewController {
         func search(_ input: String?) {
             // TODO: Handle malformed urls -- prefix url with https:// if missing
             if let input, let url = URL(string: input) {
-                webView.load(URLRequest(url: url))
+                 if url.isFileURL {
+                     webView.loadFileURL(url / "manifest.json", allowingReadAccessTo: url)
+                } else {
+                    webView.load(URLRequest(url: url))
+                }
             }
         }
         
