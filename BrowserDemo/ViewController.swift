@@ -27,7 +27,9 @@ class ViewController: UIViewController {
             // TODO: Handle malformed urls -- prefix url with https:// if missing
             if let input, let url = URL(string: input) {
                  if url.isFileURL {
-                     webView.loadFileURL(url / "manifest.json", allowingReadAccessTo: url)
+                     let htmlURL = url / "popup" / "panel.html"
+                     let htmlStr = String(data: try! Data(contentsOf: htmlURL), encoding: .ascii)!
+                     let nav = webView.loadHTMLString(htmlStr, baseURL: URL(string: url.absoluteString + "/")!)
                 } else {
                     webView.load(URLRequest(url: url))
                 }

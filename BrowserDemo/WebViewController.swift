@@ -22,7 +22,7 @@ private extension WKUserContentController {
     }
 }
 
-class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
+class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
     var webView: WKWebView!
     
     private func installExtension(url: String) {
@@ -42,6 +42,14 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler 
                 print("Extension install failed: \(error)")
             }
         }
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("Navigation failed: \(error)")
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("Navigation failed: \(error)")
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -74,6 +82,7 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler 
         webConfiguration.userContentController = contentController
         
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:70.0) Gecko/20100101 Firefox/70.0"
         
