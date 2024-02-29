@@ -37,7 +37,7 @@ final class BrowserDemoTests: XCTestCase {
         let resultURL = try BrowserExtension.saveUnpacked(self.extensionData, filename: extractDirName, extensionInstallDir: tmpExtensionsDir)
         
         XCTAssert(resultURL.lastPathComponent == "\(extractDirName)_extracted")
-        XCTAssert(FileManager.default.fileExists(atPath: resultURL.path))
-        XCTAssert(FileManager.default.fileExists(atPath: (resultURL / "manifest.json").path))
+        XCTAssert(resultURL.fileExists())
+        XCTAssert((resultURL / "manifest.json").fileExists())
     }
 }

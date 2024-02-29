@@ -10,3 +10,9 @@ import Foundation
 func / (_ url: URL, _ path: String) -> URL {
     url.appendingPathComponent(path)
 }
+
+extension URL {
+    func fileExists(_ manager: FileManager=FileManager.default) -> Bool {
+        manager.fileExists(atPath: self.path)
+    }
+}

@@ -74,13 +74,13 @@ class BrowserExtension {
         
         let extractionURL = extensionInstallDir / "\(filename)_extracted"
         
-        if FileManager.default.fileExists(atPath: extractionURL.path) {
+        if extractionURL.fileExists() {
             try FileManager.default.removeItem(at: extractionURL)
         }
-        try FileManager.default.createDirectory(at: extractionURL, withIntermediateDirectories: true)
         
-        // TODO: Is this blocking?
+        try FileManager.default.createDirectory(at: extractionURL, withIntermediateDirectories: true)
         try FileManager.default.unzipItem(at: xpiURL, to: extractionURL)
+        
         return extractionURL
     }
 }
