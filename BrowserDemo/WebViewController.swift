@@ -7,6 +7,7 @@
 
 import UIKit
 import WebKit
+import ZIPFoundation
 
 private enum ScriptMessageType: String {
     case installExtension
@@ -24,14 +25,31 @@ private extension WKUserContentController {
 class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler {
     var webView: WKWebView!
     
+    private func installExtension(url: String) {
+        Task {
+            do {
+                // TODO: Error handling
+                let xpiDownloadURL = URL(string: url)!
+                let (data, resp) = try await URLSession.shared.data(from: xpiDownloadURL)
+                
+                try BrowserExtension.saveUnpacked(data, filename: xpiDownloadURL.lastPathComponent)
+                
+                DispatchQueue.main.async {
+                    // TODO: Send unzip file url in this message
+                    NotificationCenter.default.post(name: .installedBrowserExtension, object: nil)
+                }
+            } catch {
+                print("Extension install failed: \(error)")
+            }
+        }
+    }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch ScriptMessageType(rawValue: message.name) {
         case .installExtension:
             let extensionURL = message.body as! String
             print("Extension url: \(extensionURL)")
-            // TODO: Info on installed extension?
-            NotificationCenter.default.post(name: .installedBrowserExtension, object: nil)
+            self.installExtension(url: extensionURL)
         default:
             break
         }

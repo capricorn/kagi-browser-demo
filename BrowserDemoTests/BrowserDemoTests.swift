@@ -28,4 +28,16 @@ final class BrowserDemoTests: XCTestCase {
         let ext = try BrowserExtension.extract(extensionData)
         XCTAssert(ext.icons.count == 4)
     }
+    
+    func testSaveUnpacked() throws {
+        let tmpExtensionsDir = FileManager.default.temporaryDirectory.appendingPathComponent(self.name)
+        try FileManager.default.createDirectory(at: tmpExtensionsDir, withIntermediateDirectories: true)
+        
+        let extractDirName = UUID().uuidString
+        let resultURL = try BrowserExtension.saveUnpacked(self.extensionData, filename: extractDirName, extensionInstallDir: tmpExtensionsDir)
+        
+        XCTAssert(resultURL.lastPathComponent == "\(extractDirName)_extracted")
+        XCTAssert(FileManager.default.fileExists(atPath: resultURL.path))
+        XCTAssert(FileManager.default.fileExists(atPath: resultURL.appendingPathComponent("manifest.json").path))
+    }
 }
