@@ -11,6 +11,8 @@ import ZIPFoundation
 
 private enum ScriptMessageType: String {
     case installExtension
+    case imageError
+    case console
 }
 
 private extension WKUserContentController {
@@ -22,8 +24,52 @@ private extension WKUserContentController {
     }
 }
 
-class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, WKURLSchemeHandler {
     var webView: WKWebView!
+    
+    func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
+        print("Handling file:// task: \(urlSchemeTask.request)")
+        //let baseExtensionURL = URL(string: urlSchemeTask.request.allHTTPHeaderFields!["extension_base_url"]!)!
+        
+        // Idea:
+        // TODO: Reference this since it's the install directory
+        let baseExtensionURL = Bundle.main.url(forResource: "panel", withExtension: "html", subdirectory: "top_sites_button-1.5/popup")!.deletingLastPathComponent().deletingLastPathComponent()
+        //let baseExtensionURL = FileManager.default.orionExtensionInstallDir
+        //let relativeFilePath = urlSchemeTask.request.url!.relativePath(from: baseExtensionURL)!
+        
+        
+        //let fileURL = URL(string: "file://" + urlSchemeTask.request.url!.path)!
+        //let fileURL = URL(string: "file://" + baseExtensionURL.appendingPathComponent(relativeFilePath.absoluteString).path)!
+        var fileURL = urlSchemeTask.request.url!
+        fileURL = URL(string: "file://" + fileURL.path)!
+        // Resolve absolute paths in extensions
+        // TODO: Check if url base is the extension
+        //if fileURL.path.starts(with: "/") {
+        // This is an absolute extension request
+        if fileURL.sameBasePath(as: baseExtensionURL) == false {
+            fileURL = baseExtensionURL.appendingPathComponent(urlSchemeTask.request.url!.path)
+        }
+        
+        var mimeType = "text/html"
+        if fileURL.absoluteString.hasSuffix("css") {
+            mimeType = "text/css"
+        } else if fileURL.absoluteString.hasSuffix("js") {
+            mimeType = "text/javascript"
+        } else if fileURL.absoluteString.hasSuffix("png") {
+            mimeType = "image/png"
+        }
+        
+        let file = try! Data(contentsOf: fileURL)
+        // TODO: Is the url correct?
+        urlSchemeTask.didReceive(URLResponse(url: urlSchemeTask.request.url!, mimeType: mimeType, expectedContentLength: file.count, textEncodingName: "utf8"))
+        urlSchemeTask.didReceive(file)
+        urlSchemeTask.didFinish()
+        // TODO
+    }
+    
+    func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
+        print("Stopping request: \(urlSchemeTask.request.url)")
+    }
     
     private func installExtension(url: String) {
         Task {
@@ -52,13 +98,23 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         print("Navigation failed: \(error)")
     }
     
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        print("Nav action: \(navigationAction.request.url?.absoluteString)")
+        decisionHandler(.allow)
+    }
+    
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch ScriptMessageType(rawValue: message.name) {
         case .installExtension:
             let extensionURL = message.body as! String
             print("Extension url: \(extensionURL)")
             self.installExtension(url: extensionURL)
+        case .imageError:
+            print("Image error: \(message.body)")
+        case .console:
+            print("Console: \(message.body as! String)")
         default:
+            print("Received message: \(message.name)")
             break
         }
     }
@@ -66,6 +122,7 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         let contentController = WKUserContentController()
+        
         
         let browserNameUserScript = """
         if (document.domain == 'addons.mozilla.org') { \
@@ -78,8 +135,21 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         }
         """
         contentController.add(self, name: .installExtension)
+        contentController.add(self, name: .imageError)
+        contentController.add(self, name: .console)
         contentController.addUserScript(WKUserScript(source: browserNameUserScript, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
+        let topSitesAPIScript = String(data: try! Data(contentsOf: Bundle.main.url(forResource: "TopSitesAPI", withExtension: "js")!), encoding: .utf8)!
+        let rewriterScript = String(data: try! Data(contentsOf: Bundle.main.url(forResource: "PathRewriter", withExtension: "js")!), encoding: .utf8)!
+         // TODO: Is this _always_ injected?
+         // TODO: Simple user script that just adds a title
+        contentController.addUserScript(WKUserScript(source: topSitesAPIScript, injectionTime: .atDocumentStart, forMainFrameOnly: false))
+        contentController.addUserScript(WKUserScript(source: rewriterScript, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
+        //contentController.addUserScript(WKUserScript(source: topSitesAPIScript, injectionTime: .atDocumentStart, forMainFrameOnly: false))
         webConfiguration.userContentController = contentController
+        webConfiguration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
+        webConfiguration.setValue(true, forKey: "allowUniversalAccessFromFileURLs")
+        webConfiguration.setValue(true, forKey: "_allowUniversalAccessFromFileURLs")
+        webConfiguration.setURLSchemeHandler(self, forURLScheme: "extension")
         
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.navigationDelegate = self
@@ -92,8 +162,10 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*
         let myURL = URL(string:"https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
+         */
     }
 }

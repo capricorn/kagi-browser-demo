@@ -1,0 +1,62 @@
+Manifest-Version: 1.0
+
+Name: localise.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 0BL1WwLU+0e5hyMmUjB1dg==
+SHA1-Digest: BTRmsw7eIL9IEbUUbgajz904fps=
+
+Name: manifest.json
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: M6v0VH/c2vIMVzPPJfwijQ==
+SHA1-Digest: Avj7fEG4LXksy/8UiimRU8Ydsgc=
+
+Name: _locales/en_US/messages.json
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: bZctJE1XOwT67Zb/qI6KwQ==
+SHA1-Digest: jyHmAR8heCSmihg7mwMMdHpYKkM=
+
+Name: icons/16-flame.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: H/Ymr59q3Q5MMu8nzsh3nA==
+SHA1-Digest: AzwgW8aR4a7PL4ZLWcEJNLLEVTo=
+
+Name: icons/24-flame.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: D9ZKBxJekG/mHc5GxyG6/g==
+SHA1-Digest: kch8lJY9UiDK83EyPE4RGptg/9k=
+
+Name: icons/32-flame.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: yk8zNQXWT+O5PiRErpKITg==
+SHA1-Digest: x5cUu5/BOp6Mn8bdR8LsbHmb0Bs=
+
+Name: icons/48-flame.png
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: /pPaS4/rRKgG7n77aSDn8g==
+SHA1-Digest: G9kx/BQ7Dyr7hmwbhVJNnpbxJSM=
+
+Name: option/option.html
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 1sgHlCCz2b2wsyAJhPGJng==
+SHA1-Digest: KPOxMt4zXuIJirjDQ/ZMYA8NDJ8=
+
+Name: option/option.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: EdIg+lGsmOjOIAJcxahpOg==
+SHA1-Digest: ueW3yzEBGcLBURhY2a7aSA1OtXc=
+
+Name: popup/panel.css
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: 9GF4Zq3QGL4JgdKV077QCA==
+SHA1-Digest: O8wQi6MrIKVIzmOUuj2XsC419Z4=
+
+Name: popup/panel.html
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: LEwLcByiF9Bco9PrUUVW5w==
+SHA1-Digest: QrlgbKE9HSHBYkX1eamZqGjAk3Q=
+
+Name: popup/panel.js
+Digest-Algorithms: MD5 SHA1
+MD5-Digest: uYEzUN7YIGl85RyriLeaEA==
+SHA1-Digest: tnaAeDUmHMSqIkgLNU/3aRBlnfY=
+
