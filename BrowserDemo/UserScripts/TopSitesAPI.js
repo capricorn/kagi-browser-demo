@@ -1,10 +1,15 @@
 class TopSites {
     get() {
         return new Promise((resolve, reject) => {
-            resolve([
-                { title: "google", url: "https://google.com" },
-                { title: "kagi", url: "https://kagi.com" },
-            ]);
+            window.addEventListener('topSites', (e) => {
+                console.log('got top sites message: ' + e.type);
+                console.log('output: ' + e.topSites);
+                let result = JSON.parse(e.topSites);
+                console.log('parse result: ' + JSON.stringify(result.topSites));
+                console.log('parse result: ' + result.topSites[0].url);
+                resolve(result.topSites);
+            }, { once: true})
+            window.webkit.messageHandlers.topSites.postMessage({});
         });
     }
 }

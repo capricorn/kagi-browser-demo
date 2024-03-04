@@ -13,9 +13,10 @@ private enum ScriptMessageType: String {
     case installExtension
     case imageError
     case console
+    case topSites
 }
 
-struct BrowserHistory {
+struct BrowserHistory: Codable {
     let title: String
     let url: String
     var visits: Int
@@ -31,8 +32,17 @@ private extension WKUserContentController {
 }
 
 class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, WKURLSchemeHandler {
+    
+    
     var webView: WKWebView!
     var history: [String: BrowserHistory] = [:]
+    
+    var topSites: [BrowserHistory] {
+        Array(history
+            .map({$0.value})
+            .sorted(by: { $0.visits > $1.visits })
+            .prefix(10))
+    }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if let url = webView.url?.absoluteString {
@@ -41,7 +51,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
                 copy.visits += 1
                 history[url] = copy
             } else {
-                history[url] = BrowserHistory(title: webView.title ?? "", url: url, visits: 1)
+                let title = ((webView.title ?? "").isEmpty) ? "Untitled" : webView.title!
+                history[url] = BrowserHistory(title: title, url: url, visits: 1)
             }
         }
     }
@@ -132,6 +143,17 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
             print("Image error: \(message.body)")
         case .console:
             print("Console: \(message.body as? String)")
+        case .topSites:
+            // TODO: Custom serialization for array type?
+            var topSitesJSON = String(data: try! JSONEncoder().encode(self.topSites), encoding: .utf8)!
+            topSitesJSON = "{ \"topSites\": \(topSitesJSON) }"
+            // Evaluate javascript to post the message
+            let js = """
+            let event = new Event('topSites');
+            event.topSites = '\(topSitesJSON)';
+            window.dispatchEvent(event);
+            """
+            webView.evaluateJavaScript(js)
         default:
             print("Received message: \(message.name)")
             break
@@ -153,9 +175,11 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
             }, 100); \
         }
         """
+        // TODO: Dynamically register all?
         contentController.add(self, name: .installExtension)
         contentController.add(self, name: .imageError)
         contentController.add(self, name: .console)
+        contentController.add(self, name: .topSites)
         contentController.addUserScript(WKUserScript(source: browserNameUserScript, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
         let topSitesAPIScript = String(data: try! Data(contentsOf: Bundle.main.url(forResource: "TopSitesAPI", withExtension: "js")!), encoding: .utf8)!
         let rewriterScript = String(data: try! Data(contentsOf: Bundle.main.url(forResource: "PathRewriter", withExtension: "js")!), encoding: .utf8)!
