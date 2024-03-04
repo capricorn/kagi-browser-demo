@@ -15,6 +15,12 @@ private enum ScriptMessageType: String {
     case console
 }
 
+struct BrowserHistory {
+    let title: String
+    let url: String
+    var visits: Int
+}
+
 private extension WKUserContentController {
     func add(
         _ scriptMessageHandler: WKScriptMessageHandler,
@@ -26,6 +32,19 @@ private extension WKUserContentController {
 
 class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, WKURLSchemeHandler {
     var webView: WKWebView!
+    var history: [String: BrowserHistory] = [:]
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if let url = webView.url?.absoluteString {
+            if let prevVisit = history[url] {
+                var copy = prevVisit
+                copy.visits += 1
+                history[url] = copy
+            } else {
+                history[url] = BrowserHistory(title: webView.title ?? "", url: url, visits: 1)
+            }
+        }
+    }
     
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
         print("Handling file:// task: \(urlSchemeTask.request)")
@@ -112,7 +131,7 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         case .imageError:
             print("Image error: \(message.body)")
         case .console:
-            print("Console: \(message.body as! String)")
+            print("Console: \(message.body as? String)")
         default:
             print("Received message: \(message.name)")
             break
