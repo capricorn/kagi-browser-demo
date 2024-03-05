@@ -55,4 +55,8 @@ extension URL {
         
         return true
     }
+    
+    var extensionScheme: URL {
+        URL(string: "extension://" + self.path)!
+    }
 }

@@ -18,6 +18,10 @@ extension BrowserToolbarDelegate {
     func back() {}
 }
 
+class ExtensionButton: UIButton {
+    var ext: BrowserExtension?
+}
+
 class BrowserToolbarViewController: UIViewController {
     private var backButton: UIButton!
     private var searchTextField: UITextField!
@@ -54,6 +58,16 @@ class BrowserToolbarViewController: UIViewController {
         delegate?.back()
     }
     
+    @objc
+    private func handleExtensionButton(sender: UIButton) {
+        let extButton = sender as! ExtensionButton
+        let ext = extButton.ext!
+        print("Tapped button: \(extButton.ext!.manifest.name) @ \(extButton.ext!.unpackedURL)")
+        let popupURL = (ext.unpackedURL! / ext.manifest.popupHTMLPath!).extensionScheme
+        // TODO: Special callback for loading extension
+        delegate?.search(popupURL.absoluteString)
+    }
+    
     init(delegate: BrowserToolbarDelegate?=nil) {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
@@ -83,10 +97,12 @@ class BrowserToolbarViewController: UIViewController {
     
     var extensionButtons: [UIButton] {
         self.extensions.map {
-            let button = UIButton()
+            let button = ExtensionButton()
             // TODO: Take largest icon
             let buttonImage = $0.icons.first ?? UIImage(systemName: "puzzlepiece.extension")!
             button.setImage(buttonImage, for: .normal)
+            button.addTarget(self, action: #selector(handleExtensionButton(sender:)), for: .touchDown)
+            button.ext = $0
             // TODO: Set callback (open extension popup)
             return button
         }

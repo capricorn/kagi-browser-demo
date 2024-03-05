@@ -34,6 +34,7 @@ class BrowserExtension {
     var js: String?
     var icons: [UIImage] = []
     var manifest: ExtensionManifest!
+    var unpackedURL: URL?
     
     private init() {}
     
@@ -55,6 +56,7 @@ class BrowserExtension {
         ext.icons = manifest.icon_paths
             .compactMap({ try? Data(contentsOf: extensionRoot.appendingPathComponent($0)) })
             .compactMap({ UIImage(data: $0) })
+        ext.unpackedURL = extensionRoot
         
         return ext
     }

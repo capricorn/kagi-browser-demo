@@ -67,5 +67,6 @@ final class BrowserDemoTests: XCTestCase {
     func testExtensionLoad() throws {
         let ext = try BrowserExtension.load(self.unpackedExtensionRoot)
         XCTAssert(ext.icons.count == 4)
+        XCTAssert(ext.manifest.popupHTMLPath == "popup/panel.html")
     }
 }
