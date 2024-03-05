@@ -83,7 +83,8 @@ class ViewController: UIViewController {
         }
         
         func back() {
-            NotificationCenter.default.post(name: .installedBrowserExtension, object: URL(string: "file://abc"))
+            let unpackedExtension = Bundle.main.url(forResource: "top_sites_button-1.5", withExtension: "")!
+            NotificationCenter.default.post(name: .installedBrowserExtension, object: unpackedExtension)
             if webView.canGoBack {
                 webView.goBack()
             }

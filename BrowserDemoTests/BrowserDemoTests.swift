@@ -11,10 +11,12 @@ import XCTest
 final class BrowserDemoTests: XCTestCase {
     var testBundle: Bundle!
     var extensionData: Data!
+    var unpackedExtensionRoot: URL!
 
     override func setUpWithError() throws {
         self.testBundle = Bundle(for: type(of: self))
         self.extensionData = try Data(contentsOf: testBundle.url(forResource: "top_sites_button-1.5", withExtension: "xpi")!)
+        self.unpackedExtensionRoot = testBundle.url(forResource: "top_sites_button-1.5", withExtension: "")
     }
 
     override func tearDownWithError() throws {}
@@ -60,5 +62,10 @@ final class BrowserDemoTests: XCTestCase {
         
         XCTAssert(url.sameBasePath(as: baseURL))
         XCTAssertFalse(url.sameBasePath(as: absoluteURL))
+    }
+    
+    func testExtensionLoad() throws {
+        let ext = try BrowserExtension.load(self.unpackedExtensionRoot)
+        XCTAssert(ext.icons.count == 4)
     }
 }

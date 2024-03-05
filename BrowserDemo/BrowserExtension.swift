@@ -28,7 +28,8 @@ extension FileManager {
 }
 
 class BrowserExtension {
-    struct MissingManifestError: Error {}
+    struct ManifestMissingError: Error {}
+    struct ManifestSerializationError: Error {}
     
     var js: String?
     var icons: [UIImage] = []
@@ -36,13 +37,35 @@ class BrowserExtension {
     
     private init() {}
     
+    static func load(_ extensionRoot: URL, fileManager: FileManager = .default) throws -> BrowserExtension {
+        let files = fileManager
+        let manifestURL = (extensionRoot / "manifest.json")
+        let ext = BrowserExtension()
+        
+        guard let manifestData = try? Data(contentsOf: manifestURL) else {
+            throw ManifestMissingError()
+        }
+        
+        guard let manifest = try? JSONDecoder().decode(ExtensionManifest.self, from: manifestData) else {
+            throw ManifestSerializationError()
+        }
+        
+        // TODO: Set popup html url
+        ext.manifest = manifest
+        ext.icons = manifest.icon_paths
+            .compactMap({ try? Data(contentsOf: extensionRoot.appendingPathComponent($0)) })
+            .compactMap({ UIImage(data: $0) })
+        
+        return ext
+    }
+    
     static func extract(_ extensionData: Data) throws -> BrowserExtension {
         let fileManager = FileManager()
         let ext = BrowserExtension()
         let archive = try Archive(data: extensionData, accessMode: .read)
         
         guard let manifestEntry = archive["manifest.json"] else {
-            throw MissingManifestError()
+            throw ManifestMissingError()
         }
         
         _ = try archive.extract(manifestEntry) { data in

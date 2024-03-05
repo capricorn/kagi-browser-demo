@@ -25,6 +25,7 @@ class BrowserToolbarViewController: UIViewController {
     private var extensionInstallSubscriber: AnyCancellable? = nil
     
     private var extensionIcons: [UIImage] = []
+    var extensions: [BrowserExtension] = []
     var delegate: BrowserToolbarDelegate?
     
     class SearchDelegate: NSObject, UITextFieldDelegate {
@@ -58,11 +59,21 @@ class BrowserToolbarViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         self.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { [weak self] message in
-            print("Received installation update: \((message.object as? URL)?.path)")
-            let extensionURL = URL(string: "file://" + (message.object as! URL).path)!
-            self?.delegate?.search(extensionURL.absoluteString)
-            self?.extensionIcons.append(UIImage(systemName: "puzzlepiece.extension")!)
-            self?.viewDidLoad()
+            guard let extensionURL = message.object as? URL else {
+                print("Could not install extension: 'url' message obj missing.")
+                return
+            }
+            
+            do {
+                let extensionRootURL = URL(string: "file://" + extensionURL.path)!
+                let ext = try BrowserExtension.load(extensionRootURL)
+                
+                self?.extensions.append(ext)
+                self?.viewDidLoad()
+            } catch {
+                print("Failed to add extension \(extensionURL) (\(error))")
+            }
+            
         }
     }
     
@@ -71,10 +82,12 @@ class BrowserToolbarViewController: UIViewController {
     }
     
     var extensionButtons: [UIButton] {
-        self.extensionIcons.map {
+        self.extensions.map {
             let button = UIButton()
-            button.setImage($0, for: .normal)
-            // TODO: Set callback
+            // TODO: Take largest icon
+            let buttonImage = $0.icons.first ?? UIImage(systemName: "puzzlepiece.extension")!
+            button.setImage(buttonImage, for: .normal)
+            // TODO: Set callback (open extension popup)
             return button
         }
     }
@@ -108,7 +121,7 @@ class BrowserToolbarViewController: UIViewController {
         
         // TODO: Build UIButton
         let extensionStack = UIStackView(arrangedSubviews: self.extensionButtons)
-        if self.extensionIcons.count > 0 {
+        if self.extensions.count > 0 {
             self.view.addSubview(extensionStack)
             extensionStack.translatesAutoresizingMaskIntoConstraints = false
             extensionStack.axis = .horizontal
@@ -122,7 +135,7 @@ class BrowserToolbarViewController: UIViewController {
             extensionStack.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         }
         
-        let searchTrailingAnchor = (self.extensionIcons.count > 0) ? extensionStack.leadingAnchor : view.trailingAnchor
+        let searchTrailingAnchor = (self.extensions.count > 0) ? extensionStack.leadingAnchor : view.trailingAnchor
         
         searchTextField.leadingAnchor.constraint(equalTo: backButton.trailingAnchor).isActive = true
         searchTextField.trailingAnchor.constraint(equalTo: searchTrailingAnchor).isActive = true
