@@ -126,6 +126,7 @@ class BrowserToolbarViewController: UIViewController {
         searchTextField.autocapitalizationType = .none
         searchTextField.autocorrectionType = .no
         searchTextField.keyboardType = .URL
+        searchTextField.returnKeyType = .search
         
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         backButton.translatesAutoresizingMaskIntoConstraints = false
