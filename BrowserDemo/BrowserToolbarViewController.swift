@@ -156,7 +156,7 @@ class BrowserToolbarViewController: UIViewController {
         searchTextField.delegate = self.searchDelegate
         searchTextField.autocapitalizationType = .none
         searchTextField.autocorrectionType = .no
-        searchTextField.keyboardType = .URL
+        searchTextField.keyboardType = .webSearch
         searchTextField.returnKeyType = .search
         
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
