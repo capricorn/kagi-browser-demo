@@ -122,6 +122,9 @@ class BrowserToolbarViewController: UIViewController {
         searchTextField.borderStyle = .line
         searchTextField.placeholder = "Search"
         searchTextField.delegate = self.searchDelegate
+        searchTextField.autocapitalizationType = .none
+        searchTextField.autocorrectionType = .no
+        searchTextField.keyboardType = .URL
         
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         backButton.translatesAutoresizingMaskIntoConstraints = false
