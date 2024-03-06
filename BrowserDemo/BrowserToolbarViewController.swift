@@ -36,6 +36,7 @@ class BrowserToolbarViewController: UIViewController {
         var toolbarDelegate: BrowserToolbarDelegate?
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
             return true
         }
         
