@@ -22,6 +22,12 @@ class ExtensionButton: UIButton {
     var ext: BrowserExtension?
 }
 
+private extension NSRegularExpression {
+    func matches(_ input: String) -> Bool {
+        return self.matches(in: input, range: NSRange(location: 0, length: input.utf16.count)).isEmpty == false
+    }
+}
+
 class BrowserToolbarViewController: UIViewController {
     private var backButton: UIButton!
     private var searchTextField: UITextField!
@@ -35,6 +41,29 @@ class BrowserToolbarViewController: UIViewController {
     class SearchDelegate: NSObject, UITextFieldDelegate {
         var toolbarDelegate: BrowserToolbarDelegate?
         
+        func urlQuery(_ query: String) -> Bool {
+            // TODO: Support unicode tlds, etc
+            let tldRegex = try! NSRegularExpression(pattern: "\\.[a-z]+$", options: .caseInsensitive)
+            return (query.split(separator: " ").count == 1) && tldRegex.matches(query)
+        }
+        
+        func adjustQuery(_ query: String) -> String {
+            if urlQuery(query) {
+                let prefixRegex = try! NSRegularExpression(pattern: "^https?://")
+                if prefixRegex.matches(query) {
+                    return query
+                } else {
+                    return "https://" + query
+                }
+            } else {
+                let encodedQuery = query
+                    .split(separator: " ")
+                    .joined(separator: "+")
+                    .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                return "https://search.marginalia.nu/search?query=\(encodedQuery)"
+            }
+        }
+        
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
             textField.resignFirstResponder()
             return true
@@ -47,7 +76,9 @@ class BrowserToolbarViewController: UIViewController {
         func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
             switch reason {
             case .committed:
-                toolbarDelegate?.search(textField.text)
+                if let query = textField.text {
+                    toolbarDelegate?.search(adjustQuery(query))
+                }
             default:
                 break
             }
