@@ -1,5 +1,3 @@
-let images = document.getElementsByTagName('img');
-
 /*
 for (var img of images) {
     console.log('original src: ' + img.src);
@@ -11,4 +9,3 @@ for (var img of images) {
 }
  */
 
-console.log("Rewrote images");

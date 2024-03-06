@@ -59,4 +59,12 @@ extension URL {
     var extensionScheme: URL {
         URL(string: "extension://" + self.path)!
     }
+    
+    var fileScheme: URL {
+        URL(string: "file://" + self.path)!
+    }
+    
+    var isExtensionURL: Bool {
+        return self.scheme == "extension"
+    }
 }

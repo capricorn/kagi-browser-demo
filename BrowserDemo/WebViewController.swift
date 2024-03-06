@@ -63,8 +63,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         
         // Idea:
         // TODO: Reference this since it's the install directory
-        let baseExtensionURL = Bundle.main.url(forResource: "panel", withExtension: "html", subdirectory: "top_sites_button-1.5/popup")!.deletingLastPathComponent().deletingLastPathComponent()
-        //let baseExtensionURL = FileManager.default.orionExtensionInstallDir
+        //let baseExtensionURL = Bundle.main.url(forResource: "panel", withExtension: "html", subdirectory: "top_sites_button-1.5/popup")!.deletingLastPathComponent().deletingLastPathComponent()
+        let baseExtensionURL = FileManager.default.orionExtensionInstallDir
         //let relativeFilePath = urlSchemeTask.request.url!.relativePath(from: baseExtensionURL)!
         
         
@@ -77,7 +77,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         //if fileURL.path.starts(with: "/") {
         // This is an absolute extension request
         if fileURL.sameBasePath(as: baseExtensionURL) == false {
-            fileURL = baseExtensionURL.appendingPathComponent(urlSchemeTask.request.url!.path)
+            let extensionName = urlSchemeTask.request.mainDocumentURL!.relativePath(from: baseExtensionURL)!.pathComponents[0]
+            fileURL = baseExtensionURL.appendingPathComponent(extensionName).appendingPathComponent(urlSchemeTask.request.url!.path)
         }
         
         var mimeType = "text/html"
@@ -90,8 +91,9 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         }
         
         let file = try! Data(contentsOf: fileURL)
+        let urlResponse = HTTPURLResponse(url: urlSchemeTask.request.url!, mimeType: mimeType, expectedContentLength: file.count, textEncodingName: "utf8")
         // TODO: Is the url correct?
-        urlSchemeTask.didReceive(URLResponse(url: urlSchemeTask.request.url!, mimeType: mimeType, expectedContentLength: file.count, textEncodingName: "utf8"))
+        urlSchemeTask.didReceive(urlResponse)
         urlSchemeTask.didReceive(file)
         urlSchemeTask.didFinish()
         // TODO
@@ -205,10 +207,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
         let myURL = URL(string:"https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
-         */
     }
 }
