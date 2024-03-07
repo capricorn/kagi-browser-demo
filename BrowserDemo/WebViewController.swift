@@ -154,7 +154,9 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         }
     }
     
-    override func loadView() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let webConfiguration = WKWebViewConfiguration()
         let contentController = WKUserContentController()
         
@@ -182,10 +184,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:70.0) Gecko/20100101 Firefox/70.0"
         
         view = webView
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
         
         let myURL = URL(string:"https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")
         let myRequest = URLRequest(url: myURL!)
