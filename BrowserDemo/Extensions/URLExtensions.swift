@@ -67,4 +67,15 @@ extension URL {
     var isExtensionURL: Bool {
         return self.scheme == "extension"
     }
+    
+    var mimeType: String? {
+        let file = self.lastPathComponent
+        let mimeMap = [
+            "css": "text/css",
+            "js": "text/javascript",
+            "png": "image/png",
+            "html": "text/html" ]
+        
+        return mimeMap.first(where: { key, _ in file.hasSuffix(key) })?.value
+    }
 }

@@ -81,16 +81,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
             fileURL = baseExtensionURL.appendingPathComponent(extensionName).appendingPathComponent(urlSchemeTask.request.url!.path)
         }
         
-        var mimeType = "text/html"
-        if fileURL.absoluteString.hasSuffix("css") {
-            mimeType = "text/css"
-        } else if fileURL.absoluteString.hasSuffix("js") {
-            mimeType = "text/javascript"
-        } else if fileURL.absoluteString.hasSuffix("png") {
-            mimeType = "image/png"
-        }
-        
         let file = try! Data(contentsOf: fileURL)
+        let mimeType = fileURL.mimeType ?? "text/plain"
         let urlResponse = HTTPURLResponse(url: urlSchemeTask.request.url!, mimeType: mimeType, expectedContentLength: file.count, textEncodingName: "utf8")
         // TODO: Is the url correct?
         urlSchemeTask.didReceive(urlResponse)
