@@ -136,7 +136,6 @@
 			children = (
 				F0AD584E2B9A716300195D13 /* WebKit */,
 				F0AD58492B9A6A8A00195D13 /* Toolbar */,
-				F0AEFF9E2B913EF600AEC73D /* UserScripts */,
 				F0AEFF9B2B912D5600AEC73D /* Extensions */,
 				F032471A2B8D005600B1C6B3 /* AppDelegate.swift */,
 				F032471C2B8D005600B1C6B3 /* SceneDelegate.swift */,
@@ -145,8 +144,6 @@
 				F03247232B8D005800B1C6B3 /* Assets.xcassets */,
 				F03247252B8D005800B1C6B3 /* LaunchScreen.storyboard */,
 				F03247282B8D005800B1C6B3 /* Info.plist */,
-				F03247582B8E8ADE00B1C6B3 /* BrowserExtension.swift */,
-				F032475A2B8E902500B1C6B3 /* ExtensionManifest.swift */,
 			);
 			path = BrowserDemo;
 			sourceTree = "<group>";
@@ -192,10 +189,21 @@
 		F0AD584E2B9A716300195D13 /* WebKit */ = {
 			isa = PBXGroup;
 			children = (
+				F0AD58532B9A88F700195D13 /* BrowserExtension */,
+				F0AEFF9E2B913EF600AEC73D /* UserScripts */,
 				F032474C2B8D50E600B1C6B3 /* WebViewController.swift */,
 				F0AD584F2B9A71E700195D13 /* WebViewModel.swift */,
 			);
 			path = WebKit;
+			sourceTree = "<group>";
+		};
+		F0AD58532B9A88F700195D13 /* BrowserExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F03247582B8E8ADE00B1C6B3 /* BrowserExtension.swift */,
+				F032475A2B8E902500B1C6B3 /* ExtensionManifest.swift */,
+			);
+			path = BrowserExtension;
 			sourceTree = "<group>";
 		};
 		F0AEFF9B2B912D5600AEC73D /* Extensions */ = {
