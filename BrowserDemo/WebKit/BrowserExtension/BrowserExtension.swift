@@ -9,10 +9,6 @@ import Foundation
 import ZIPFoundation
 import UIKit
 
-extension NSNotification.Name {
-    static let installedBrowserExtension = Notification.Name("installed-extension")
-}
-
 class BrowserExtension {
     struct ManifestMissingError: Error {}
     struct ManifestSerializationError: Error {}
