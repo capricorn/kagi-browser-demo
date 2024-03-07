@@ -32,6 +32,26 @@ class WebViewModel {
                 history[url] = BrowserHistory(title: title, url: url, visits: 1)
             }
         }
-
+    }
+    
+    func handleExtensionRequest(_ request: URLRequest) throws -> (Data, URLResponse) {
+        let baseExtensionURL = FileManager.default.orionExtensionInstallDir
+        var fileURL = request.url!.fileScheme
+        
+        // This is an absolute extension request
+        if fileURL.sameBasePath(as: baseExtensionURL) == false {
+            let extensionName = request.mainDocumentURL!.relativePath(from: baseExtensionURL)!.pathComponents[0]
+            fileURL = baseExtensionURL.appendingPathComponent(extensionName).appendingPathComponent(request.url!.path)
+        }
+        
+        let extensionData = try! Data(contentsOf: fileURL)
+        let mimeType = fileURL.mimeType ?? "text/plain"
+        let urlResponse = HTTPURLResponse(
+            url: request.url!,
+            mimeType: mimeType,
+            expectedContentLength: extensionData.count,
+            textEncodingName: "utf8")
+        
+        return (extensionData, urlResponse)
     }
 }

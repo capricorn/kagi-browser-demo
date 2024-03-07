@@ -40,37 +40,14 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
     }
     
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
-        print("Handling file:// task: \(urlSchemeTask.request)")
-        //let baseExtensionURL = URL(string: urlSchemeTask.request.allHTTPHeaderFields!["extension_base_url"]!)!
-        
-        // Idea:
-        // TODO: Reference this since it's the install directory
-        //let baseExtensionURL = Bundle.main.url(forResource: "panel", withExtension: "html", subdirectory: "top_sites_button-1.5/popup")!.deletingLastPathComponent().deletingLastPathComponent()
-        let baseExtensionURL = FileManager.default.orionExtensionInstallDir
-        //let relativeFilePath = urlSchemeTask.request.url!.relativePath(from: baseExtensionURL)!
-        
-        
-        //let fileURL = URL(string: "file://" + urlSchemeTask.request.url!.path)!
-        //let fileURL = URL(string: "file://" + baseExtensionURL.appendingPathComponent(relativeFilePath.absoluteString).path)!
-        var fileURL = urlSchemeTask.request.url!
-        fileURL = URL(string: "file://" + fileURL.path)!
-        // Resolve absolute paths in extensions
-        // TODO: Check if url base is the extension
-        //if fileURL.path.starts(with: "/") {
-        // This is an absolute extension request
-        if fileURL.sameBasePath(as: baseExtensionURL) == false {
-            let extensionName = urlSchemeTask.request.mainDocumentURL!.relativePath(from: baseExtensionURL)!.pathComponents[0]
-            fileURL = baseExtensionURL.appendingPathComponent(extensionName).appendingPathComponent(urlSchemeTask.request.url!.path)
+        do {
+            let (file, urlResponse) = try viewModel.handleExtensionRequest(urlSchemeTask.request)
+            urlSchemeTask.didReceive(urlResponse)
+            urlSchemeTask.didReceive(file)
+            urlSchemeTask.didFinish()
+        } catch {
+            print("Failed to handle url scheme task: \(error)")
         }
-        
-        let file = try! Data(contentsOf: fileURL)
-        let mimeType = fileURL.mimeType ?? "text/plain"
-        let urlResponse = HTTPURLResponse(url: urlSchemeTask.request.url!, mimeType: mimeType, expectedContentLength: file.count, textEncodingName: "utf8")
-        // TODO: Is the url correct?
-        urlSchemeTask.didReceive(urlResponse)
-        urlSchemeTask.didReceive(file)
-        urlSchemeTask.didFinish()
-        // TODO
     }
     
     func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
