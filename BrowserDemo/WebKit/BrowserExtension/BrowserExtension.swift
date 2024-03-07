@@ -13,20 +13,6 @@ extension NSNotification.Name {
     static let installedBrowserExtension = Notification.Name("installed-extension")
 }
 
-extension FileManager {
-    var orionExtensionInstallDir: URL {
-        let appSupportURL = try! FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        let appDirName = "\(Bundle.main.bundleIdentifier!).Orion"
-        let extensionURL = appSupportURL.appendingPathComponent(appDirName).appendingPathComponent("Extensions")
-        
-        if FileManager.default.fileExists(atPath: extensionURL.absoluteString) == false {
-            try! FileManager.default.createDirectory(at: extensionURL, withIntermediateDirectories: true)
-        }
-        
-        return extensionURL
-    }
-}
-
 class BrowserExtension {
     struct ManifestMissingError: Error {}
     struct ManifestSerializationError: Error {}
