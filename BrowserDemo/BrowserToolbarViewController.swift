@@ -31,8 +31,11 @@ private extension NSRegularExpression {
 class BrowserToolbarViewController: UIViewController {
     private var backButton: UIButton!
     private var searchTextField: UITextField!
+    private var extensionStack: UIStackView!
     private let searchDelegate = SearchDelegate()
     private var extensionInstallSubscriber: AnyCancellable? = nil
+    
+    private var extensionStackWidthConstraint: NSLayoutConstraint!
     
     private var extensionIcons: [UIImage] = []
     var extensions: [BrowserExtension] = []
@@ -126,6 +129,10 @@ class BrowserToolbarViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { [weak self] message in
+            guard let self else {
+                return
+            }
+            
             guard let extensionURL = message.object as? URL else {
                 print("Could not install extension: 'url' message obj missing.")
                 return
@@ -135,8 +142,15 @@ class BrowserToolbarViewController: UIViewController {
                 let extensionRootURL = URL(string: "file://" + extensionURL.path)!
                 let ext = try BrowserExtension.load(extensionRootURL)
                 
-                self?.extensions.append(ext)
-                self?.viewDidLoad()
+                self.extensions.append(ext)
+                
+                UIView.animate(withDuration: 1/4) {
+                    if self.extensions.count == 1 {
+                        self.displayExtensionStack()
+                    }
+                    self.appendExtensionStack(ext)
+                    self.view.layoutIfNeeded()
+                }
             } catch {
                 print("Failed to add extension \(extensionURL) (\(error))")
             }
@@ -146,6 +160,45 @@ class BrowserToolbarViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.extensionInstallSubscriber = nil
+    }
+    
+    private func displayExtensionStack() {
+        extensionStack.removeConstraint(extensionStackWidthConstraint)
+        extensionStackWidthConstraint = extensionStack.widthAnchor.constraint(greaterThanOrEqualToConstant: 0)
+        extensionStackWidthConstraint.isActive = true
+    }
+    
+    private func appendExtensionStack(_ ext: BrowserExtension) {
+        self.extensionStack.addArrangedSubview(self.buildExtensionButton(ext))
+    }
+    
+    private func buildExtensionButton(_ ext: BrowserExtension) -> UIButton {
+        let button = ExtensionButton()
+        let icon32 = ext.icons.first(where: { img in img.size == CGSize(width: 32, height: 32) })
+        let buttonImage = icon32 ?? UIImage(systemName: "puzzlepiece.extension")!
+        
+        button.setImage(buttonImage, for: .normal)
+        button.addTarget(self, action: #selector(handleExtensionButton(sender:)), for: .touchDown)
+        button.ext = ext
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
+        return button
+    }
+    
+    private func setupExtensionStack() {
+        extensionStack = UIStackView()
+        self.view.addSubview(extensionStack)
+        extensionStack.translatesAutoresizingMaskIntoConstraints = false
+        extensionStack.axis = .horizontal
+        extensionStack.clipsToBounds = true
+        extensionStack.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
+        extensionStack.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        extensionStack.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        extensionStack.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        
+        extensionStackWidthConstraint = extensionStack.widthAnchor.constraint(equalToConstant: 0)
+        extensionStackWidthConstraint.isActive = true
     }
     
     override func viewDidLoad() {
@@ -168,6 +221,7 @@ class BrowserToolbarViewController: UIViewController {
         searchTextField.returnKeyType = .search
         
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        searchTextField.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(backButton)
@@ -179,23 +233,9 @@ class BrowserToolbarViewController: UIViewController {
         backButton.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         backButton.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
-        // TODO: Build UIButton
-        let extensionStack = UIStackView(arrangedSubviews: self.extensionButtons)
-        if self.extensions.count > 0 {
-            self.view.addSubview(extensionStack)
-            extensionStack.translatesAutoresizingMaskIntoConstraints = false
-            extensionStack.axis = .horizontal
-            //extensionStack.leadingAnchor.constraint(equalTo: searchTextField.leadingAnchor).isActive = true
-            extensionStack.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            extensionStack.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-            extensionStack.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            // TODO: Scrollview?
-            extensionStack.widthAnchor.constraint(greaterThanOrEqualToConstant: 32).isActive = true
-            extensionStack.clipsToBounds = true
-            extensionStack.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
-        }
+        setupExtensionStack()
         
-        let searchTrailingAnchor = (self.extensions.count > 0) ? extensionStack.leadingAnchor : view.trailingAnchor
+        let searchTrailingAnchor = extensionStack.leadingAnchor
         
         searchTextField.leadingAnchor.constraint(equalTo: backButton.trailingAnchor).isActive = true
         searchTextField.trailingAnchor.constraint(equalTo: searchTrailingAnchor).isActive = true
