@@ -40,6 +40,7 @@ class BrowserToolbarViewController: UIViewController {
     
     class SearchDelegate: NSObject, UITextFieldDelegate {
         var toolbarDelegate: BrowserToolbarDelegate?
+        static let marginaliaQuery = "https://search.marginalia.nu/search?query="
         
         func urlQuery(_ query: String) -> Bool {
             // TODO: Support unicode tlds, etc
@@ -60,7 +61,7 @@ class BrowserToolbarViewController: UIViewController {
                     .split(separator: " ")
                     .joined(separator: "+")
                     .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-                return "https://search.marginalia.nu/search?query=\(encodedQuery)"
+                return SearchDelegate.marginaliaQuery + encodedQuery
             }
         }
         

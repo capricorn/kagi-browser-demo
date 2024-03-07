@@ -30,6 +30,7 @@
 		F0AD58422B97A27D00195D13 /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
 		F0AD58432B97A28100195D13 /* PathRewriter.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AD583E2B92919800195D13 /* PathRewriter.js */; };
 		F0AD58442B97A28900195D13 /* top_sites_button-1.5.xpi in Resources */ = {isa = PBXBuildFile; fileRef = F03247532B8E89B400B1C6B3 /* top_sites_button-1.5.xpi */; };
+		F0AD58462B9A2CF800195D13 /* SearchDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD58452B9A2CF800195D13 /* SearchDelegateTests.swift */; };
 		F0AEFF9D2B912D6400AEC73D /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEFF9C2B912D6400AEC73D /* URLExtensions.swift */; };
 		F0AEFFA02B913F1300AEC73D /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
 		F0AEFFA12B91413B00AEC73D /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
@@ -73,6 +74,7 @@
 		F032475A2B8E902500B1C6B3 /* ExtensionManifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionManifest.swift; sourceTree = "<group>"; };
 		F0AD583B2B92779D00195D13 /* top_sites_button-1.5 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "top_sites_button-1.5"; sourceTree = "<group>"; };
 		F0AD583E2B92919800195D13 /* PathRewriter.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = PathRewriter.js; sourceTree = "<group>"; };
+		F0AD58452B9A2CF800195D13 /* SearchDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDelegateTests.swift; sourceTree = "<group>"; };
 		F0AEFF9C2B912D6400AEC73D /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TopSitesAPI.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +150,7 @@
 			children = (
 				F032474E2B8E877400B1C6B3 /* TestData */,
 				F03247312B8D005800B1C6B3 /* BrowserDemoTests.swift */,
+				F0AD58452B9A2CF800195D13 /* SearchDelegateTests.swift */,
 			);
 			path = BrowserDemoTests;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0AD58462B9A2CF800195D13 /* SearchDelegateTests.swift in Sources */,
 				F03247322B8D005800B1C6B3 /* BrowserDemoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
