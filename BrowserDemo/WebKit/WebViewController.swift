@@ -32,29 +32,11 @@ private extension WKUserContentController {
 }
 
 class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, WKURLSchemeHandler {
-    
-    
     var webView: WKWebView!
-    var history: [String: BrowserHistory] = [:]
-    
-    var topSites: [BrowserHistory] {
-        Array(history
-            .map({$0.value})
-            .sorted(by: { $0.visits > $1.visits })
-            .prefix(10))
-    }
+    let viewModel = WebViewModel()
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if let url = webView.url?.absoluteString {
-            if let prevVisit = history[url] {
-                var copy = prevVisit
-                copy.visits += 1
-                history[url] = copy
-            } else {
-                let title = ((webView.title ?? "").isEmpty) ? "Untitled" : webView.title!
-                history[url] = BrowserHistory(title: title, url: url, visits: 1)
-            }
-        }
+        viewModel.updateHistory(webView.url, siteTitle: webView.title)
     }
     
     func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
@@ -139,7 +121,7 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
             print("Console: \(message.body as? String)")
         case .topSites:
             // TODO: Custom serialization for array type?
-            var topSitesJSON = String(data: try! JSONEncoder().encode(self.topSites), encoding: .utf8)!
+            var topSitesJSON = String(data: try! JSONEncoder().encode(viewModel.topSites), encoding: .utf8)!
             topSitesJSON = "{ \"topSites\": \(topSitesJSON) }"
             // Evaluate javascript to post the message
             let js = """

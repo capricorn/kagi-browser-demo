@@ -31,6 +31,7 @@
 		F0AD58482B9A339700195D13 /* AddToOrion.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AD58472B9A339700195D13 /* AddToOrion.js */; };
 		F0AD584B2B9A6AFE00195D13 /* SearchTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD584A2B9A6AFE00195D13 /* SearchTextFieldDelegate.swift */; };
 		F0AD584D2B9A6BD200195D13 /* BrowserToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD584C2B9A6BD200195D13 /* BrowserToolbarViewModel.swift */; };
+		F0AD58502B9A71E700195D13 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD584F2B9A71E700195D13 /* WebViewModel.swift */; };
 		F0AEFF9D2B912D6400AEC73D /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEFF9C2B912D6400AEC73D /* URLExtensions.swift */; };
 		F0AEFFA02B913F1300AEC73D /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
 		F0AEFFA12B91413B00AEC73D /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
@@ -77,6 +78,7 @@
 		F0AD58472B9A339700195D13 /* AddToOrion.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AddToOrion.js; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
 		F0AD584A2B9A6AFE00195D13 /* SearchTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldDelegate.swift; sourceTree = "<group>"; };
 		F0AD584C2B9A6BD200195D13 /* BrowserToolbarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserToolbarViewModel.swift; sourceTree = "<group>"; };
+		F0AD584F2B9A71E700195D13 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		F0AEFF9C2B912D6400AEC73D /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TopSitesAPI.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				F032474C2B8D50E600B1C6B3 /* WebViewController.swift */,
+				F0AD584F2B9A71E700195D13 /* WebViewModel.swift */,
 			);
 			path = WebKit;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				F032474B2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift in Sources */,
 				F0AD584D2B9A6BD200195D13 /* BrowserToolbarViewModel.swift in Sources */,
 				F032475B2B8E902500B1C6B3 /* ExtensionManifest.swift in Sources */,
+				F0AD58502B9A71E700195D13 /* WebViewModel.swift in Sources */,
 				F032474D2B8D50E600B1C6B3 /* WebViewController.swift in Sources */,
 				F03247592B8E8ADE00B1C6B3 /* BrowserExtension.swift in Sources */,
 				F032471D2B8D005600B1C6B3 /* SceneDelegate.swift in Sources */,
