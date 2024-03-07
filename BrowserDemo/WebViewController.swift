@@ -158,17 +158,7 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         let webConfiguration = WKWebViewConfiguration()
         let contentController = WKUserContentController()
         
-        
-        let browserNameUserScript = """
-        if (document.domain == 'addons.mozilla.org') { \
-            window.webkit.messageHandlers.installExtension.postMessage();
-            setInterval(() => { \
-                let button = document.querySelector('a.AMInstallButton-button'); \
-                button.textContent = 'Add to Orion'; \
-                button.onclick = (e) => { window.webkit.messageHandlers.installExtension.postMessage(button.href) };
-            }, 100); \
-        }
-        """
+        let browserNameUserScript = String(data: try! Data(contentsOf: Bundle.main.url(forResource: "AddToOrion", withExtension: "js")!), encoding: .utf8)!
         // TODO: Dynamically register all?
         contentController.add(self, name: .installExtension)
         contentController.add(self, name: .imageError)
