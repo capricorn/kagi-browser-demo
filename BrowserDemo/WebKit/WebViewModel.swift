@@ -54,4 +54,23 @@ class WebViewModel {
         
         return (extensionData, urlResponse)
     }
+    
+    @discardableResult
+    func installExtensionTask(_ xpiDownloadURL: URL) -> Task<Void, Never> {
+        Task {
+            do {
+                let (data, _) = try await URLSession.shared.data(from: xpiDownloadURL)
+                
+                let extensionURL = try BrowserExtension.saveUnpacked(data, filename: xpiDownloadURL.lastPathComponent)
+                
+                DispatchQueue.main.async {
+                    // TODO: Send unzip file url in this message
+                    NotificationCenter.default.post(name: .installedBrowserExtension, object: extensionURL)
+                }
+            } catch {
+                print("Extension install failed: \(error)")
+            }
+        }
+
+    }
 }

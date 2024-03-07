@@ -54,25 +54,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         print("Stopping request: \(urlSchemeTask.request.url)")
     }
     
-    private func installExtension(url: String) {
-        Task {
-            do {
-                // TODO: Error handling
-                let xpiDownloadURL = URL(string: url)!
-                let (data, resp) = try await URLSession.shared.data(from: xpiDownloadURL)
-                
-                let extensionURL = try BrowserExtension.saveUnpacked(data, filename: xpiDownloadURL.lastPathComponent)
-                
-                DispatchQueue.main.async {
-                    // TODO: Send unzip file url in this message
-                    NotificationCenter.default.post(name: .installedBrowserExtension, object: extensionURL)
-                }
-            } catch {
-                print("Extension install failed: \(error)")
-            }
-        }
-    }
-    
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("Navigation failed: \(error)")
     }
@@ -89,9 +70,8 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch ScriptMessageType(rawValue: message.name) {
         case .installExtension:
-            let extensionURL = message.body as! String
-            print("Extension url: \(extensionURL)")
-            self.installExtension(url: extensionURL)
+            let xpiURL = URL(string: message.body as! String)!
+            viewModel.installExtensionTask(xpiURL)
         case .imageError:
             print("Image error: \(message.body)")
         case .console:
