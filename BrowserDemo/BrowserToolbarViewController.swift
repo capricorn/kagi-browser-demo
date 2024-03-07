@@ -113,8 +113,8 @@ class BrowserToolbarViewController: UIViewController {
     var extensionButtons: [UIButton] {
         self.extensions.map {
             let button = ExtensionButton()
-            // TODO: Take largest icon
-            let buttonImage = $0.icons.first ?? UIImage(systemName: "puzzlepiece.extension")!
+            let icon32 = $0.icons.first(where: { img in img.size == CGSize(width: 32, height: 32) })
+            let buttonImage = icon32 ?? UIImage(systemName: "puzzlepiece.extension")!
             button.setImage(buttonImage, for: .normal)
             button.addTarget(self, action: #selector(handleExtensionButton(sender:)), for: .touchDown)
             button.ext = $0
