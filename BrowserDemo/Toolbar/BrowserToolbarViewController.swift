@@ -22,72 +22,17 @@ class ExtensionButton: UIButton {
     var ext: BrowserExtension?
 }
 
-private extension NSRegularExpression {
-    func matches(_ input: String) -> Bool {
-        return self.matches(in: input, range: NSRange(location: 0, length: input.utf16.count)).isEmpty == false
-    }
-}
-
 class BrowserToolbarViewController: UIViewController {
     private var backButton: UIButton!
     private var searchTextField: UITextField!
     private var extensionStack: UIStackView!
+    private var extensionStackWidthConstraint: NSLayoutConstraint!
+    
     private let searchDelegate = SearchDelegate()
     private var extensionInstallSubscriber: AnyCancellable? = nil
     
-    private var extensionStackWidthConstraint: NSLayoutConstraint!
-    
-    private var extensionIcons: [UIImage] = []
     var extensions: [BrowserExtension] = []
     var delegate: BrowserToolbarDelegate?
-    
-    class SearchDelegate: NSObject, UITextFieldDelegate {
-        var toolbarDelegate: BrowserToolbarDelegate?
-        static let marginaliaQuery = "https://search.marginalia.nu/search?query="
-        
-        func urlQuery(_ query: String) -> Bool {
-            // TODO: Support unicode tlds, etc
-            let tldRegex = try! NSRegularExpression(pattern: "\\.[a-z]+$", options: .caseInsensitive)
-            return (query.split(separator: " ").count == 1) && tldRegex.matches(query)
-        }
-        
-        func adjustQuery(_ query: String) -> String {
-            if urlQuery(query) {
-                let prefixRegex = try! NSRegularExpression(pattern: "^https?://")
-                if prefixRegex.matches(query) {
-                    return query
-                } else {
-                    return "https://" + query
-                }
-            } else {
-                let encodedQuery = query
-                    .split(separator: " ")
-                    .joined(separator: "+")
-                    .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-                return SearchDelegate.marginaliaQuery + encodedQuery
-            }
-        }
-        
-        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            textField.resignFirstResponder()
-            return true
-        }
-        
-        func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-            return true
-        }
-        
-        func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-            switch reason {
-            case .committed:
-                if let query = textField.text {
-                    toolbarDelegate?.search(adjustQuery(query))
-                }
-            default:
-                break
-            }
-        }
-    }
     
     @objc
     private func handleBackButton() {
@@ -111,19 +56,6 @@ class BrowserToolbarViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-    
-    var extensionButtons: [UIButton] {
-        self.extensions.map {
-            let button = ExtensionButton()
-            let icon32 = $0.icons.first(where: { img in img.size == CGSize(width: 32, height: 32) })
-            let buttonImage = icon32 ?? UIImage(systemName: "puzzlepiece.extension")!
-            button.setImage(buttonImage, for: .normal)
-            button.addTarget(self, action: #selector(handleExtensionButton(sender:)), for: .touchDown)
-            button.ext = $0
-            // TODO: Set callback (open extension popup)
-            return button
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

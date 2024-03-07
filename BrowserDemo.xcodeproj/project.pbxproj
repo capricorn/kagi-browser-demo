@@ -29,6 +29,7 @@
 		F0AD58442B97A28900195D13 /* top_sites_button-1.5.xpi in Resources */ = {isa = PBXBuildFile; fileRef = F03247532B8E89B400B1C6B3 /* top_sites_button-1.5.xpi */; };
 		F0AD58462B9A2CF800195D13 /* SearchDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD58452B9A2CF800195D13 /* SearchDelegateTests.swift */; };
 		F0AD58482B9A339700195D13 /* AddToOrion.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AD58472B9A339700195D13 /* AddToOrion.js */; };
+		F0AD584B2B9A6AFE00195D13 /* SearchTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD584A2B9A6AFE00195D13 /* SearchTextFieldDelegate.swift */; };
 		F0AEFF9D2B912D6400AEC73D /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEFF9C2B912D6400AEC73D /* URLExtensions.swift */; };
 		F0AEFFA02B913F1300AEC73D /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
 		F0AEFFA12B91413B00AEC73D /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
@@ -73,6 +74,7 @@
 		F0AD583B2B92779D00195D13 /* top_sites_button-1.5 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "top_sites_button-1.5"; sourceTree = "<group>"; };
 		F0AD58452B9A2CF800195D13 /* SearchDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDelegateTests.swift; sourceTree = "<group>"; };
 		F0AD58472B9A339700195D13 /* AddToOrion.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = AddToOrion.js; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
+		F0AD584A2B9A6AFE00195D13 /* SearchTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldDelegate.swift; sourceTree = "<group>"; };
 		F0AEFF9C2B912D6400AEC73D /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TopSitesAPI.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,6 +128,7 @@
 		F03247192B8D005600B1C6B3 /* BrowserDemo */ = {
 			isa = PBXGroup;
 			children = (
+				F0AD58492B9A6A8A00195D13 /* Toolbar */,
 				F0AEFF9E2B913EF600AEC73D /* UserScripts */,
 				F0AEFF9B2B912D5600AEC73D /* Extensions */,
 				F032471A2B8D005600B1C6B3 /* AppDelegate.swift */,
@@ -135,7 +138,6 @@
 				F03247232B8D005800B1C6B3 /* Assets.xcassets */,
 				F03247252B8D005800B1C6B3 /* LaunchScreen.storyboard */,
 				F03247282B8D005800B1C6B3 /* Info.plist */,
-				F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */,
 				F032474C2B8D50E600B1C6B3 /* WebViewController.swift */,
 				F03247582B8E8ADE00B1C6B3 /* BrowserExtension.swift */,
 				F032475A2B8E902500B1C6B3 /* ExtensionManifest.swift */,
@@ -168,6 +170,15 @@
 				F03247532B8E89B400B1C6B3 /* top_sites_button-1.5.xpi */,
 			);
 			path = TestData;
+			sourceTree = "<group>";
+		};
+		F0AD58492B9A6A8A00195D13 /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */,
+				F0AD584A2B9A6AFE00195D13 /* SearchTextFieldDelegate.swift */,
+			);
+			path = Toolbar;
 			sourceTree = "<group>";
 		};
 		F0AEFF9B2B912D5600AEC73D /* Extensions */ = {
@@ -337,6 +348,7 @@
 				F032471F2B8D005600B1C6B3 /* ViewController.swift in Sources */,
 				F0AEFF9D2B912D6400AEC73D /* URLExtensions.swift in Sources */,
 				F032471B2B8D005600B1C6B3 /* AppDelegate.swift in Sources */,
+				F0AD584B2B9A6AFE00195D13 /* SearchTextFieldDelegate.swift in Sources */,
 				F032474B2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift in Sources */,
 				F032475B2B8E902500B1C6B3 /* ExtensionManifest.swift in Sources */,
 				F032474D2B8D50E600B1C6B3 /* WebViewController.swift in Sources */,

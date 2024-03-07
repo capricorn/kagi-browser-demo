@@ -9,10 +9,10 @@ import XCTest
 @testable import BrowserDemo
 
 final class SearchDelegateTests: XCTestCase {
-    private var delegate: BrowserToolbarViewController.SearchDelegate!
+    private var delegate: SearchDelegate!
 
     override func setUpWithError() throws {
-        delegate = BrowserToolbarViewController.SearchDelegate()
+        delegate = SearchDelegate()
     }
 
     override func tearDownWithError() throws {}
@@ -34,7 +34,7 @@ final class SearchDelegateTests: XCTestCase {
     
     /// Any search that is not a domain will instead resolve as a marginalia query.
     func testRewriteSearchAsMarginaliaQuery() throws {
-        let marginalia = BrowserToolbarViewController.SearchDelegate.marginaliaQuery
+        let marginalia = SearchDelegate.marginaliaQuery
         let query1 = "software correctness"
         let query2 = "swift"
         
