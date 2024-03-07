@@ -58,9 +58,9 @@ class ViewController: UIViewController {
         webView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: toolbarView.topAnchor).isActive = true
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.keyboardOpenSubscriber = NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification).sink { [weak self] notification in
             guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
@@ -79,8 +79,18 @@ class ViewController: UIViewController {
                 self?.toolbarBottomConstraint.constant = 0
                 self?.view.layoutIfNeeded()
             })
-        }
+        }       
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.keyboardOpenSubscriber = nil
+        self.keyboardCloseSubscriber = nil
+    }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         let webViewController = WebViewController()
         webView = webViewController.view!
         
