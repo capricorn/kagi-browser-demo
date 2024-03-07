@@ -8,12 +8,6 @@
 import UIKit
 import Foundation
 
-private extension NSRegularExpression {
-    func matches(_ input: String) -> Bool {
-        return self.matches(in: input, range: NSRange(location: 0, length: input.utf16.count)).isEmpty == false
-    }
-}
-
 class SearchDelegate: NSObject, UITextFieldDelegate {
     var toolbarDelegate: BrowserToolbarDelegate?
     static let marginaliaQuery = "https://search.marginalia.nu/search?query="
