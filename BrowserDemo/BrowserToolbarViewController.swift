@@ -104,24 +104,6 @@ class BrowserToolbarViewController: UIViewController {
     init(delegate: BrowserToolbarDelegate?=nil) {
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
-        
-        self.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { [weak self] message in
-            guard let extensionURL = message.object as? URL else {
-                print("Could not install extension: 'url' message obj missing.")
-                return
-            }
-            
-            do {
-                let extensionRootURL = URL(string: "file://" + extensionURL.path)!
-                let ext = try BrowserExtension.load(extensionRootURL)
-                
-                self?.extensions.append(ext)
-                self?.viewDidLoad()
-            } catch {
-                print("Failed to add extension \(extensionURL) (\(error))")
-            }
-            
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -139,6 +121,31 @@ class BrowserToolbarViewController: UIViewController {
             // TODO: Set callback (open extension popup)
             return button
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { [weak self] message in
+            guard let extensionURL = message.object as? URL else {
+                print("Could not install extension: 'url' message obj missing.")
+                return
+            }
+            
+            do {
+                let extensionRootURL = URL(string: "file://" + extensionURL.path)!
+                let ext = try BrowserExtension.load(extensionRootURL)
+                
+                self?.extensions.append(ext)
+                self?.viewDidLoad()
+            } catch {
+                print("Failed to add extension \(extensionURL) (\(error))")
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.extensionInstallSubscriber = nil
     }
     
     override func viewDidLoad() {
