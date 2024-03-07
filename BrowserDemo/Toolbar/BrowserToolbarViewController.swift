@@ -28,10 +28,9 @@ class BrowserToolbarViewController: UIViewController {
     private var extensionStack: UIStackView!
     private var extensionStackWidthConstraint: NSLayoutConstraint!
     
-    private let searchDelegate = SearchDelegate()
-    private var extensionInstallSubscriber: AnyCancellable? = nil
+    private let viewModel = BrowserToolbarViewModel()
     
-    var extensions: [BrowserExtension] = []
+    private let searchDelegate = SearchDelegate()
     var delegate: BrowserToolbarDelegate?
     
     @objc
@@ -60,7 +59,7 @@ class BrowserToolbarViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { [weak self] message in
+        viewModel.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { [weak self] message in
             guard let self else {
                 return
             }
@@ -71,18 +70,8 @@ class BrowserToolbarViewController: UIViewController {
             }
             
             do {
-                let extensionRootURL = URL(string: "file://" + extensionURL.path)!
-                let ext = try BrowserExtension.load(extensionRootURL)
-                
-                self.extensions.append(ext)
-                
-                UIView.animate(withDuration: 1/4) {
-                    if self.extensions.count == 1 {
-                        self.displayExtensionStack()
-                    }
-                    self.appendExtensionStack(ext)
-                    self.view.layoutIfNeeded()
-                }
+                let ext = try viewModel.installExtension(extensionURL)
+                self.addExtensionToToolbar(ext)
             } catch {
                 print("Failed to add extension \(extensionURL) (\(error))")
             }
@@ -91,17 +80,24 @@ class BrowserToolbarViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.extensionInstallSubscriber = nil
+        viewModel.extensionInstallSubscriber = nil
+    }
+    
+    private func addExtensionToToolbar(_ ext: BrowserExtension) {
+        UIView.animate(withDuration: 1/4) {
+            if self.viewModel.extensions.count == 1 {
+                self.displayExtensionStack()
+            }
+            
+            self.extensionStack.addArrangedSubview(self.buildExtensionButton(ext))
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func displayExtensionStack() {
         extensionStack.removeConstraint(extensionStackWidthConstraint)
         extensionStackWidthConstraint = extensionStack.widthAnchor.constraint(greaterThanOrEqualToConstant: 0)
         extensionStackWidthConstraint.isActive = true
-    }
-    
-    private func appendExtensionStack(_ ext: BrowserExtension) {
-        self.extensionStack.addArrangedSubview(self.buildExtensionButton(ext))
     }
     
     private func buildExtensionButton(_ ext: BrowserExtension) -> UIButton {
