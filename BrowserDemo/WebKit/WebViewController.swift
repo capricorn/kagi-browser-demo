@@ -11,7 +11,6 @@ import ZIPFoundation
 
 private enum ScriptMessageType: String {
     case installExtension
-    case imageError
     case console
     case topSites
 }
@@ -81,8 +80,6 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         case .installExtension:
             let xpiURL = URL(string: message.body as! String)!
             viewModel.installExtensionTask(xpiURL)
-        case .imageError:
-            print("Image error: \(message.body)")
         case .console:
             print("Console: \(message.body as? String)")
         case .topSites:
@@ -109,13 +106,13 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         let contentController = WKUserContentController()
         
         let browserNameUserScript = String(data: try! Data(contentsOf: Bundle.main.url(forResource: "AddToOrion", withExtension: "js")!), encoding: .utf8)!
-        // TODO: Dynamically register all?
+        let topSitesAPIScript = String(data: try! Data(contentsOf: Bundle.main.url(forResource: "TopSitesAPI", withExtension: "js")!), encoding: .utf8)!
+        
         contentController.add(self, name: .installExtension)
-        contentController.add(self, name: .imageError)
         contentController.add(self, name: .console)
         contentController.add(self, name: .topSites)
+        
         contentController.addUserScript(WKUserScript(source: browserNameUserScript, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
-        let topSitesAPIScript = String(data: try! Data(contentsOf: Bundle.main.url(forResource: "TopSitesAPI", withExtension: "js")!), encoding: .utf8)!
         contentController.addUserScript(WKUserScript(source: topSitesAPIScript, injectionTime: .atDocumentStart, forMainFrameOnly: false))
         
         webConfiguration.userContentController = contentController
