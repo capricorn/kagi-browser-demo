@@ -21,16 +21,6 @@ final class BrowserDemoTests: XCTestCase {
 
     override func tearDownWithError() throws {}
 
-    func testExtensionManifestExtraction() throws {
-        let ext = try BrowserExtension.extract(extensionData)
-        XCTAssert(ext.manifest.icon_paths.contains("icons/16-flame.png"), "\(ext.manifest.icon_paths)")
-    }
-    
-    func testExtensionIconExtraction() throws {
-        let ext = try BrowserExtension.extract(extensionData)
-        XCTAssert(ext.icons.count == 4)
-    }
-    
     func testSaveUnpacked() throws {
         let tmpExtensionsDir = FileManager.default.temporaryDirectory / self.name
         try FileManager.default.createDirectory(at: tmpExtensionsDir, withIntermediateDirectories: true)

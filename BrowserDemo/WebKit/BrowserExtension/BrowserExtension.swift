@@ -43,37 +43,6 @@ class BrowserExtension {
         return ext
     }
     
-    static func extract(_ extensionData: Data) throws -> BrowserExtension {
-        let fileManager = FileManager()
-        let ext = BrowserExtension()
-        let archive = try Archive(data: extensionData, accessMode: .read)
-        
-        guard let manifestEntry = archive["manifest.json"] else {
-            throw ManifestMissingError()
-        }
-        
-        _ = try archive.extract(manifestEntry) { data in
-            ext.manifest = try JSONDecoder().decode(ExtensionManifest.self, from: data)
-        }
-        
-        for iconPath in ext.manifest.icon_paths {
-            guard let iconEntry = archive[iconPath] else {
-                print("Failed to load icon at path \(iconPath)")
-                continue
-            }
-            
-            _ = try archive.extract(iconEntry) { data in
-                if let icon = UIImage(data: data) {
-                    ext.icons.append(icon)
-                } else {
-                    print("Failed to load icon as UIImage at path \(iconPath)")
-                }
-            }
-        }
-        
-        return ext
-    }
-    
     @discardableResult
     static func saveUnpacked(_ xpi: Data, filename: String, extensionInstallDir: URL=FileManager.default.orionExtensionInstallDir) throws -> URL {
         let xpiURL = FileManager.default.temporaryDirectory / filename
