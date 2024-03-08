@@ -15,21 +15,6 @@ private enum ScriptMessageType: String {
     case topSites
 }
 
-struct BrowserHistory: Codable {
-    let title: String
-    let url: String
-    var lastVisitTimestamp: Double
-    var visits: Int
-    
-    static func visitSorter(_ left: BrowserHistory, _ right: BrowserHistory) -> Bool {
-        if left.visits == right.visits {
-            return left.lastVisitTimestamp > right.lastVisitTimestamp
-        } else {
-            return left.visits > right.visits
-        }
-    }
-}
-
 private extension WKUserContentController {
     func add(
         _ scriptMessageHandler: WKScriptMessageHandler,
