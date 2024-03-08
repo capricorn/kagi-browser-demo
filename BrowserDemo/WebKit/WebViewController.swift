@@ -71,8 +71,11 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        print("Nav action: \(navigationAction.request.url?.absoluteString)")
-        decisionHandler(.allow)
+        if let url = navigationAction.request.url, viewModel.xpiAddonURL(url) {
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {

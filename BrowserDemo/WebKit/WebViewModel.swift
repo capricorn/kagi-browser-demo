@@ -72,6 +72,9 @@ class WebViewModel {
                 print("Extension install failed: \(error)")
             }
         }
-
+    }
+    
+    func xpiAddonURL(_ url: URL) -> Bool {
+        return url.host == "addons.mozilla.org" && url.absoluteString.hasSuffix(".xpi")
     }
 }
