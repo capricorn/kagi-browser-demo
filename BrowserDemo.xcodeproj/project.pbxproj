@@ -24,9 +24,6 @@
 		F032475B2B8E902500B1C6B3 /* ExtensionManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032475A2B8E902500B1C6B3 /* ExtensionManifest.swift */; };
 		F0AD583C2B92779D00195D13 /* top_sites_button-1.5 in Resources */ = {isa = PBXBuildFile; fileRef = F0AD583B2B92779D00195D13 /* top_sites_button-1.5 */; };
 		F0AD583D2B92779D00195D13 /* top_sites_button-1.5 in Resources */ = {isa = PBXBuildFile; fileRef = F0AD583B2B92779D00195D13 /* top_sites_button-1.5 */; };
-		F0AD58412B97A27A00195D13 /* top_sites_button-1.5 in Resources */ = {isa = PBXBuildFile; fileRef = F0AD583B2B92779D00195D13 /* top_sites_button-1.5 */; };
-		F0AD58422B97A27D00195D13 /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
-		F0AD58442B97A28900195D13 /* top_sites_button-1.5.xpi in Resources */ = {isa = PBXBuildFile; fileRef = F03247532B8E89B400B1C6B3 /* top_sites_button-1.5.xpi */; };
 		F0AD58462B9A2CF800195D13 /* SearchDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD58452B9A2CF800195D13 /* SearchDelegateTests.swift */; };
 		F0AD58482B9A339700195D13 /* AddToOrion.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AD58472B9A339700195D13 /* AddToOrion.js */; };
 		F0AD584B2B9A6AFE00195D13 /* SearchTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD584A2B9A6AFE00195D13 /* SearchTextFieldDelegate.swift */; };
@@ -177,6 +174,7 @@
 		F032474E2B8E877400B1C6B3 /* TestData */ = {
 			isa = PBXGroup;
 			children = (
+				F0AD583B2B92779D00195D13 /* top_sites_button-1.5 */,
 				F03247532B8E89B400B1C6B3 /* top_sites_button-1.5.xpi */,
 			);
 			path = TestData;
@@ -226,7 +224,6 @@
 		F0AEFF9E2B913EF600AEC73D /* UserScripts */ = {
 			isa = PBXGroup;
 			children = (
-				F0AD583B2B92779D00195D13 /* top_sites_button-1.5 */,
 				F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */,
 				F0AD58472B9A339700195D13 /* AddToOrion.js */,
 			);
@@ -366,9 +363,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0AD58442B97A28900195D13 /* top_sites_button-1.5.xpi in Resources */,
-				F0AD58422B97A27D00195D13 /* TopSitesAPI.js in Resources */,
-				F0AD58412B97A27A00195D13 /* top_sites_button-1.5 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

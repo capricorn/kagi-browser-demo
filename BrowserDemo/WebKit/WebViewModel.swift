@@ -13,15 +13,16 @@ class WebViewModel {
     var topSites: [BrowserHistory] {
         Array(history
             .map({$0.value})
-            .sorted(by: { $0.visits > $1.visits })
+            .sorted(by: BrowserHistory.visitSorter)
             .prefix(10))
     }
     
-    func updateHistory(_ url: URL?, siteTitle: String?=nil) {
+    func updateHistory(_ url: URL?, siteTitle: String?=nil, lastVisit: Double=Date().timeIntervalSince1970) {
         if let url = url?.absoluteString {
             if let prevVisit = history[url] {
                 var copy = prevVisit
                 copy.visits += 1
+                copy.lastVisitTimestamp = lastVisit
                 history[url] = copy
             } else {
                 var title = siteTitle ?? "Untitled"
@@ -29,7 +30,7 @@ class WebViewModel {
                     title = "Untitled"
                 }
                 
-                history[url] = BrowserHistory(title: title, url: url, visits: 1)
+                history[url] = BrowserHistory(title: title, url: url, lastVisitTimestamp: lastVisit, visits: 1)
             }
         }
     }
