@@ -42,9 +42,7 @@ class BrowserToolbarViewController: UIViewController {
     private func handleExtensionButton(sender: UIButton) {
         let extButton = sender as! ExtensionButton
         let ext = extButton.ext!
-        print("Tapped button: \(extButton.ext!.manifest.name) @ \(extButton.ext!.unpackedURL)")
         let popupURL = (ext.unpackedURL! / ext.manifest.popupHTMLPath!).extensionScheme
-        // TODO: Special callback for loading extension
         delegate?.search(popupURL.absoluteString)
     }
     
@@ -135,7 +133,6 @@ class BrowserToolbarViewController: UIViewController {
         self.searchDelegate.toolbarDelegate = self.delegate
         
         backButton = UIButton()
-        // TODO: Respect aspect ratio (wrt height)
         backButton.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         backButton.addTarget(self, action: #selector(handleBackButton), for: .touchDown)
         

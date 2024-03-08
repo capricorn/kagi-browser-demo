@@ -29,7 +29,6 @@ extension URL {
         let baseComponents = base.pathComponents
         
         var i = 0
-        //for i in 0..<components.count {
         while i < components.count {
             if baseComponents.count-1 >= i, components[i] == baseComponents[i] {
                 i += 1

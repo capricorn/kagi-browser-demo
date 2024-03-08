@@ -33,7 +33,6 @@ class BrowserExtension {
             throw ManifestSerializationError()
         }
         
-        // TODO: Set popup html url
         ext.manifest = manifest
         ext.icons = manifest.icon_paths
             .compactMap({ try? Data(contentsOf: extensionRoot.appendingPathComponent($0)) })
