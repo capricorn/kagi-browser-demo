@@ -36,6 +36,8 @@
 		F0AD585B2B9AB9A000195D13 /* BrowserExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD585A2B9AB9A000195D13 /* BrowserExtensionTests.swift */; };
 		F0AD585D2B9ABA4000195D13 /* URLExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD585C2B9ABA4000195D13 /* URLExtensionTests.swift */; };
 		F0AD585F2B9ABC4600195D13 /* BrowserHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD585E2B9ABC4600195D13 /* BrowserHistory.swift */; };
+		F0AD58632B9AC72400195D13 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD58622B9AC72400195D13 /* ArrayExtensions.swift */; };
+		F0AD58652B9AC93500195D13 /* ArrayExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD58642B9AC93500195D13 /* ArrayExtensionTests.swift */; };
 		F0AEFF9D2B912D6400AEC73D /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEFF9C2B912D6400AEC73D /* URLExtensions.swift */; };
 		F0AEFFA02B913F1300AEC73D /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
 		F0AEFFA12B91413B00AEC73D /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
@@ -90,6 +92,8 @@
 		F0AD585A2B9AB9A000195D13 /* BrowserExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserExtensionTests.swift; sourceTree = "<group>"; };
 		F0AD585C2B9ABA4000195D13 /* URLExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensionTests.swift; sourceTree = "<group>"; };
 		F0AD585E2B9ABC4600195D13 /* BrowserHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserHistory.swift; sourceTree = "<group>"; };
+		F0AD58622B9AC72400195D13 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		F0AD58642B9AC93500195D13 /* ArrayExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensionTests.swift; sourceTree = "<group>"; };
 		F0AEFF9C2B912D6400AEC73D /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TopSitesAPI.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,6 +170,7 @@
 				F0AD58512B9A816000195D13 /* WebViewModelTests.swift */,
 				F0AD585A2B9AB9A000195D13 /* BrowserExtensionTests.swift */,
 				F0AD585C2B9ABA4000195D13 /* URLExtensionTests.swift */,
+				F0AD58642B9AC93500195D13 /* ArrayExtensionTests.swift */,
 			);
 			path = BrowserDemoTests;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				F0AD58542B9A897100195D13 /* FileManagerExtensions.swift */,
 				F0AD58562B9A8ABC00195D13 /* NSNotificationExtensions.swift */,
 				F0AD58582B9A8B4A00195D13 /* NSRegularExpressionExtensions.swift */,
+				F0AD58622B9AC72400195D13 /* ArrayExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -405,6 +411,7 @@
 				F0AD58572B9A8ABC00195D13 /* NSNotificationExtensions.swift in Sources */,
 				F03247592B8E8ADE00B1C6B3 /* BrowserExtension.swift in Sources */,
 				F032471D2B8D005600B1C6B3 /* SceneDelegate.swift in Sources */,
+				F0AD58632B9AC72400195D13 /* ArrayExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +424,7 @@
 				F0AD58462B9A2CF800195D13 /* SearchDelegateTests.swift in Sources */,
 				F0AD585B2B9AB9A000195D13 /* BrowserExtensionTests.swift in Sources */,
 				F03247322B8D005800B1C6B3 /* BrowserDemoTests.swift in Sources */,
+				F0AD58652B9AC93500195D13 /* ArrayExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
