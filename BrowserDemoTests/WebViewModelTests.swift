@@ -27,14 +27,14 @@ final class WebViewModelTests: XCTestCase {
         viewModel.updateHistory(URL(string: "https://wikipedia.com")!)
         viewModel.updateHistory(URL(string: "https://wikipedia.com")!)
         
-        viewModel.updateHistory(URL(string: "4")!)
-        viewModel.updateHistory(URL(string: "5")!)
-        viewModel.updateHistory(URL(string: "6")!)
-        viewModel.updateHistory(URL(string: "7")!)
-        viewModel.updateHistory(URL(string: "8")!)
-        viewModel.updateHistory(URL(string: "9")!)
-        viewModel.updateHistory(URL(string: "10")!)
-        viewModel.updateHistory(URL(string: "11")!)
+        viewModel.updateHistory(URL(string: "https://test4.com")!)
+        viewModel.updateHistory(URL(string: "https://test5.com")!)
+        viewModel.updateHistory(URL(string: "https://test6.com")!)
+        viewModel.updateHistory(URL(string: "https://test7.com")!)
+        viewModel.updateHistory(URL(string: "https://test8.com")!)
+        viewModel.updateHistory(URL(string: "https://test9.com")!)
+        viewModel.updateHistory(URL(string: "https://test10.com")!)
+        viewModel.updateHistory(URL(string: "https://test11.com")!)
         
         let topSites = viewModel.topSites
         XCTAssert(topSites.first?.url == "https://kagi.com")
@@ -44,6 +44,6 @@ final class WebViewModelTests: XCTestCase {
         // Marginalia is the oldest of all visits with a visit count of 1 and hence is excluded.
         XCTAssertFalse(topSites.contains(where: { $0.url == "https://marginalia.nu" }), "\(topSites)")
         // '4' is therefore the oldest of the visit=1 history and therefore sorted last.
-        XCTAssert(topSites.last?.url == "4")
+        XCTAssert(topSites.last?.url == "https://test4.com")
     }
 }

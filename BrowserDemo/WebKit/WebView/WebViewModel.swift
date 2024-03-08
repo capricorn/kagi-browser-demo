@@ -14,11 +14,12 @@ class WebViewModel {
         Array(history
             .map({$0.value})
             .sorted(by: BrowserHistory.visitSorter)
+            .unique({ URL(string: $0.url)!.host! }) // Default top sites behavior is to include each domain at most once.
             .prefix(10))
     }
     
     func updateHistory(_ url: URL?, siteTitle: String?=nil, lastVisit: Double=Date().timeIntervalSince1970) {
-        if let url = url?.absoluteString {
+        if url?.host != nil, let url = url?.absoluteString {
             if let prevVisit = history[url] {
                 var copy = prevVisit
                 copy.visits += 1
