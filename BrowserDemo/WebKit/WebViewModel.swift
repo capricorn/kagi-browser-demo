@@ -65,7 +65,7 @@ class WebViewModel {
                 
                 DispatchQueue.main.async {
                     // TODO: Send unzip file url in this message
-                    NotificationCenter.default.post(name: .installedBrowserExtension, object: extensionURL)
+                    NotificationCenter.default.post(name: .orionInstalledBrowserExtension, object: extensionURL)
                 }
             } catch {
                 print("Extension install failed: \(error)")

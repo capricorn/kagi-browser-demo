@@ -8,5 +8,5 @@
 import Foundation
 
 extension NSNotification.Name {
-    static let installedBrowserExtension = Notification.Name("installed-extension")
+    static let orionInstalledBrowserExtension = Notification.Name("installed-extension")
 }

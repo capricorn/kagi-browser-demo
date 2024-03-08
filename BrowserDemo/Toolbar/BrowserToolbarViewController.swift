@@ -59,7 +59,7 @@ class BrowserToolbarViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .installedBrowserExtension).sink { [weak self] message in
+        viewModel.extensionInstallSubscriber = NotificationCenter.default.publisher(for: .orionInstalledBrowserExtension).sink { [weak self] message in
             guard let self else {
                 return
             }
