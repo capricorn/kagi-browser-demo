@@ -61,7 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F03247172B8D005600B1C6B3 /* BrowserDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F03247172B8D005600B1C6B3 /* Orion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F032471A2B8D005600B1C6B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F032471C2B8D005600B1C6B3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F032471E2B8D005600B1C6B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,9 +69,9 @@
 		F03247232B8D005800B1C6B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F03247262B8D005800B1C6B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F03247282B8D005800B1C6B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F032472D2B8D005800B1C6B3 /* BrowserDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrowserDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F032472D2B8D005800B1C6B3 /* OrionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03247312B8D005800B1C6B3 /* BrowserDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDemoTests.swift; sourceTree = "<group>"; };
-		F03247372B8D005800B1C6B3 /* BrowserDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrowserDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F03247372B8D005800B1C6B3 /* OrionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F032473B2B8D005800B1C6B3 /* BrowserDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDemoUITests.swift; sourceTree = "<group>"; };
 		F032473D2B8D005800B1C6B3 /* BrowserDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F032474A2B8D0CAC00B1C6B3 /* BrowserToolbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserToolbarViewController.swift; sourceTree = "<group>"; };
@@ -137,9 +137,9 @@
 		F03247182B8D005600B1C6B3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F03247172B8D005600B1C6B3 /* BrowserDemo.app */,
-				F032472D2B8D005800B1C6B3 /* BrowserDemoTests.xctest */,
-				F03247372B8D005800B1C6B3 /* BrowserDemoUITests.xctest */,
+				F03247172B8D005600B1C6B3 /* Orion.app */,
+				F032472D2B8D005800B1C6B3 /* OrionTests.xctest */,
+				F03247372B8D005800B1C6B3 /* OrionUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -256,9 +256,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F03247162B8D005600B1C6B3 /* BrowserDemo */ = {
+		F03247162B8D005600B1C6B3 /* Orion */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F03247412B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "BrowserDemo" */;
+			buildConfigurationList = F03247412B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "Orion" */;
 			buildPhases = (
 				F03247132B8D005600B1C6B3 /* Sources */,
 				F03247142B8D005600B1C6B3 /* Frameworks */,
@@ -268,17 +268,17 @@
 			);
 			dependencies = (
 			);
-			name = BrowserDemo;
+			name = Orion;
 			packageProductDependencies = (
 				F03247562B8E8A7900B1C6B3 /* ZIPFoundation */,
 			);
 			productName = BrowserDemo;
-			productReference = F03247172B8D005600B1C6B3 /* BrowserDemo.app */;
+			productReference = F03247172B8D005600B1C6B3 /* Orion.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F032472C2B8D005800B1C6B3 /* BrowserDemoTests */ = {
+		F032472C2B8D005800B1C6B3 /* OrionTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F03247442B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "BrowserDemoTests" */;
+			buildConfigurationList = F03247442B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "OrionTests" */;
 			buildPhases = (
 				F03247292B8D005800B1C6B3 /* Sources */,
 				F032472A2B8D005800B1C6B3 /* Frameworks */,
@@ -289,14 +289,14 @@
 			dependencies = (
 				F032472F2B8D005800B1C6B3 /* PBXTargetDependency */,
 			);
-			name = BrowserDemoTests;
+			name = OrionTests;
 			productName = BrowserDemoTests;
-			productReference = F032472D2B8D005800B1C6B3 /* BrowserDemoTests.xctest */;
+			productReference = F032472D2B8D005800B1C6B3 /* OrionTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F03247362B8D005800B1C6B3 /* BrowserDemoUITests */ = {
+		F03247362B8D005800B1C6B3 /* OrionUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F03247472B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "BrowserDemoUITests" */;
+			buildConfigurationList = F03247472B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "OrionUITests" */;
 			buildPhases = (
 				F03247332B8D005800B1C6B3 /* Sources */,
 				F03247342B8D005800B1C6B3 /* Frameworks */,
@@ -307,9 +307,9 @@
 			dependencies = (
 				F03247392B8D005800B1C6B3 /* PBXTargetDependency */,
 			);
-			name = BrowserDemoUITests;
+			name = OrionUITests;
 			productName = BrowserDemoUITests;
-			productReference = F03247372B8D005800B1C6B3 /* BrowserDemoUITests.xctest */;
+			productReference = F03247372B8D005800B1C6B3 /* OrionUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -335,7 +335,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F03247122B8D005600B1C6B3 /* Build configuration list for PBXProject "BrowserDemo" */;
+			buildConfigurationList = F03247122B8D005600B1C6B3 /* Build configuration list for PBXProject "Orion" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -351,9 +351,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F03247162B8D005600B1C6B3 /* BrowserDemo */,
-				F032472C2B8D005800B1C6B3 /* BrowserDemoTests */,
-				F03247362B8D005800B1C6B3 /* BrowserDemoUITests */,
+				F03247162B8D005600B1C6B3 /* Orion */,
+				F032472C2B8D005800B1C6B3 /* OrionTests */,
+				F03247362B8D005800B1C6B3 /* OrionUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -442,12 +442,12 @@
 /* Begin PBXTargetDependency section */
 		F032472F2B8D005800B1C6B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F03247162B8D005600B1C6B3 /* BrowserDemo */;
+			target = F03247162B8D005600B1C6B3 /* Orion */;
 			targetProxy = F032472E2B8D005800B1C6B3 /* PBXContainerItemProxy */;
 		};
 		F03247392B8D005800B1C6B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F03247162B8D005600B1C6B3 /* BrowserDemo */;
+			target = F03247162B8D005600B1C6B3 /* Orion */;
 			targetProxy = F03247382B8D005800B1C6B3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -665,7 +665,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BrowserDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BrowserDemo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Orion.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Orion";
 			};
 			name = Debug;
 		};
@@ -685,7 +685,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BrowserDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BrowserDemo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Orion.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Orion";
 			};
 			name = Release;
 		};
@@ -728,7 +728,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F03247122B8D005600B1C6B3 /* Build configuration list for PBXProject "BrowserDemo" */ = {
+		F03247122B8D005600B1C6B3 /* Build configuration list for PBXProject "Orion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F032473F2B8D005800B1C6B3 /* Debug */,
@@ -737,7 +737,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F03247412B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "BrowserDemo" */ = {
+		F03247412B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "Orion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F03247422B8D005800B1C6B3 /* Debug */,
@@ -746,7 +746,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F03247442B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "BrowserDemoTests" */ = {
+		F03247442B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "OrionTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F03247452B8D005800B1C6B3 /* Debug */,
@@ -755,7 +755,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F03247472B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "BrowserDemoUITests" */ = {
+		F03247472B8D005800B1C6B3 /* Build configuration list for PBXNativeTarget "OrionUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F03247482B8D005800B1C6B3 /* Debug */,

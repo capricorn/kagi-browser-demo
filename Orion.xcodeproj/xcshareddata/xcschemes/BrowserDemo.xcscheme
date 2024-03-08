@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F03247162B8D005600B1C6B3"
-               BuildableName = "BrowserDemo.app"
-               BlueprintName = "BrowserDemo"
-               ReferencedContainer = "container:BrowserDemo.xcodeproj">
+               BuildableName = "Orion.app"
+               BlueprintName = "Orion"
+               ReferencedContainer = "container:Orion.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,9 +35,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F032472C2B8D005800B1C6B3"
-               BuildableName = "BrowserDemoTests.xctest"
-               BlueprintName = "BrowserDemoTests"
-               ReferencedContainer = "container:BrowserDemo.xcodeproj">
+               BuildableName = "OrionTests.xctest"
+               BlueprintName = "OrionTests"
+               ReferencedContainer = "container:Orion.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -46,9 +46,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F03247362B8D005800B1C6B3"
-               BuildableName = "BrowserDemoUITests.xctest"
-               BlueprintName = "BrowserDemoUITests"
-               ReferencedContainer = "container:BrowserDemo.xcodeproj">
+               BuildableName = "OrionUITests.xctest"
+               BlueprintName = "OrionUITests"
+               ReferencedContainer = "container:Orion.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F03247162B8D005600B1C6B3"
-            BuildableName = "BrowserDemo.app"
-            BlueprintName = "BrowserDemo"
-            ReferencedContainer = "container:BrowserDemo.xcodeproj">
+            BuildableName = "Orion.app"
+            BlueprintName = "Orion"
+            ReferencedContainer = "container:Orion.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F03247162B8D005600B1C6B3"
-            BuildableName = "BrowserDemo.app"
-            BlueprintName = "BrowserDemo"
-            ReferencedContainer = "container:BrowserDemo.xcodeproj">
+            BuildableName = "Orion.app"
+            BlueprintName = "Orion"
+            ReferencedContainer = "container:Orion.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

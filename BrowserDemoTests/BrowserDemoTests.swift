@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import BrowserDemo
+@testable import Orion
 
 final class BrowserDemoTests: XCTestCase {
     override func setUpWithError() throws {}
