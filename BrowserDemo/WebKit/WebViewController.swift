@@ -116,14 +116,9 @@ class WebViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, W
         contentController.add(self, name: .topSites)
         contentController.addUserScript(WKUserScript(source: browserNameUserScript, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
         let topSitesAPIScript = String(data: try! Data(contentsOf: Bundle.main.url(forResource: "TopSitesAPI", withExtension: "js")!), encoding: .utf8)!
-         // TODO: Is this _always_ injected?
-         // TODO: Simple user script that just adds a title
         contentController.addUserScript(WKUserScript(source: topSitesAPIScript, injectionTime: .atDocumentStart, forMainFrameOnly: false))
-        //contentController.addUserScript(WKUserScript(source: topSitesAPIScript, injectionTime: .atDocumentStart, forMainFrameOnly: false))
+        
         webConfiguration.userContentController = contentController
-        webConfiguration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
-        webConfiguration.setValue(true, forKey: "allowUniversalAccessFromFileURLs")
-        webConfiguration.setValue(true, forKey: "_allowUniversalAccessFromFileURLs")
         webConfiguration.setURLSchemeHandler(self, forURLScheme: "extension")
         
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
