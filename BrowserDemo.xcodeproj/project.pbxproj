@@ -34,6 +34,7 @@
 		F0AD58572B9A8ABC00195D13 /* NSNotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD58562B9A8ABC00195D13 /* NSNotificationExtensions.swift */; };
 		F0AD58592B9A8B4A00195D13 /* NSRegularExpressionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD58582B9A8B4A00195D13 /* NSRegularExpressionExtensions.swift */; };
 		F0AD585B2B9AB9A000195D13 /* BrowserExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD585A2B9AB9A000195D13 /* BrowserExtensionTests.swift */; };
+		F0AD585D2B9ABA4000195D13 /* URLExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AD585C2B9ABA4000195D13 /* URLExtensionTests.swift */; };
 		F0AEFF9D2B912D6400AEC73D /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0AEFF9C2B912D6400AEC73D /* URLExtensions.swift */; };
 		F0AEFFA02B913F1300AEC73D /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
 		F0AEFFA12B91413B00AEC73D /* TopSitesAPI.js in Resources */ = {isa = PBXBuildFile; fileRef = F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */; };
@@ -86,6 +87,7 @@
 		F0AD58562B9A8ABC00195D13 /* NSNotificationExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotificationExtensions.swift; sourceTree = "<group>"; };
 		F0AD58582B9A8B4A00195D13 /* NSRegularExpressionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtensions.swift; sourceTree = "<group>"; };
 		F0AD585A2B9AB9A000195D13 /* BrowserExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserExtensionTests.swift; sourceTree = "<group>"; };
+		F0AD585C2B9ABA4000195D13 /* URLExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensionTests.swift; sourceTree = "<group>"; };
 		F0AEFF9C2B912D6400AEC73D /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		F0AEFF9F2B913F1300AEC73D /* TopSitesAPI.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = TopSitesAPI.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,6 +163,7 @@
 				F0AD58452B9A2CF800195D13 /* SearchDelegateTests.swift */,
 				F0AD58512B9A816000195D13 /* WebViewModelTests.swift */,
 				F0AD585A2B9AB9A000195D13 /* BrowserExtensionTests.swift */,
+				F0AD585C2B9ABA4000195D13 /* URLExtensionTests.swift */,
 			);
 			path = BrowserDemoTests;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0AD58522B9A816000195D13 /* WebViewModelTests.swift in Sources */,
+				F0AD585D2B9ABA4000195D13 /* URLExtensionTests.swift in Sources */,
 				F0AD58462B9A2CF800195D13 /* SearchDelegateTests.swift in Sources */,
 				F0AD585B2B9AB9A000195D13 /* BrowserExtensionTests.swift in Sources */,
 				F03247322B8D005800B1C6B3 /* BrowserDemoTests.swift in Sources */,
